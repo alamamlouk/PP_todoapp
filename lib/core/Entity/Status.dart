@@ -1,6 +1,0 @@
-enum Status{ DONE,
-  CANCELED,
-  IN_PROGRESS,
-  UNDONE,
-  TODO,
-  LATE}

@@ -1,12 +1,20 @@
-import 'package:flutter/material.dart';
-import 'package:todo_app/Pages/master_page.dart';
 
-import 'app/feature/Home/Screen/home_page.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_app/Pages/master_page.dart';
+import 'package:todo_app/core/Providers/task_category_provider.dart';
+import 'package:todo_app/core/Providers/task_provider.dart';
+
 
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_)=>TaskProvider()),
+    ChangeNotifierProvider(create: (_)=>TaskCategoryProvider()),
+
+  ],
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -16,17 +24,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Flutter Demo',
 
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Keep me-up',
+
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key});
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();

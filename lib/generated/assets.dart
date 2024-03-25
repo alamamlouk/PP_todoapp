@@ -2,24 +2,46 @@
 class Assets {
   Assets._();
 
-  static const String entityCategory = 'lib/core/Entity/Category.dart';
-  static const String entityStatus = 'lib/core/Entity/Status.dart';
+  static const String categoryServiceGlobalCategoryService = 'lib/core/Shared/services/CategoryService/global_category_service.dart';
+  static const String categoryServiceGlobalTaskServices = 'lib/core/Shared/services/CategoryService/global_task_services.dart';
+  static const String dTOFetchRecentTask = 'lib/core/DTO/Fetch_recent_task.dart';
+  static const String dTOTaskUpdateRequest = 'lib/core/DTO/task_update_request.dart';
   static const String entityTask = 'lib/core/Entity/Task.dart';
+  static const String entityTaskCategory = 'lib/core/Entity/task_category.dart';
   static const String entityUser = 'lib/core/Entity/User.dart';
+  static const String enumStatus = 'lib/core/Enum/status.dart';
+  static const String functionGetCalendarDataSource = 'lib/app/feature/DisplayTasksInCalendar/Function/get_calendar_data_source.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String homePageWidgetsBoxWithIconAndText  = 'lib/app/feature/Home/HomePageWidgets/BoxWithIconAndText .dart';
   static const String homePageWidgetsTaskListItem = 'lib/app/feature/Home/HomePageWidgets/TaskListItem.dart';
+  static const String libBaseUrl = 'lib/base_url.dart';
   static const String libMain = 'lib/main.dart';
   static const String pagesMasterPage = 'lib/Pages/master_page.dart';
+  static const String presentationDisplayCategory = 'lib/app/feature/Category/Presentation/display_category.dart';
+  static const String presentationPlaning = 'lib/app/feature/DisplayTasksInCalendar/Presentation/planing.dart';
+  static const String providersTaskCategoryProvider = 'lib/core/Providers/task_category_provider.dart';
+  static const String providersTaskProvider = 'lib/core/Providers/task_provider.dart';
   static const String screenAddTaskScreen = 'lib/app/feature/AddTask/Screen/add_task_screen.dart';
-  static const String screenCalendarScreen = 'lib/app/feature/DisplayTasksInCalendar/Screen/calendar_screen.dart';
   static const String screenHomePage = 'lib/app/feature/Home/Screen/home_page.dart';
+  static const String screrenTaskDetails = 'lib/app/feature/DisplayTaskDetails/Screren/task_details.dart';
+  static const String servicesServices = 'lib/app/feature/AddTask/Services/Services.dart';
   static const String servicesTaskService = 'lib/app/feature/Home/Services/task_service.dart';
   static const String sharedFunctions = 'lib/app/feature/AddTask/Shared/functions.dart';
+  static const String sharedTaskDto = 'lib/app/feature/AddTask/Shared/taskDto.dart';
+  static const String widgetsAddCategoryWidget = 'lib/app/feature/Category/Widgets/add_category_widget.dart';
   static const String widgetsBuildDateTime = 'lib/app/feature/AddTask/widgets/build_date_time.dart';
+  static const String widgetsCategoryItem = 'lib/app/feature/AddTask/widgets/category_item.dart';
   static const String widgetsCustomTextFormField = 'lib/core/Shared/Widgets/Custom_text_form_field.dart';
+  static const String widgetsDisplayCategoryItem = 'lib/app/feature/Category/Widgets/display_category_item.dart';
   static const String widgetsNavigationBar = 'lib/core/Shared/Widgets/navigation_bar.dart';
+  static const String widgetsParagraphTextField = 'lib/app/feature/AddTask/widgets/paragraph_text_field.dart';
   static const String widgetsPickDateWidget = 'lib/app/feature/AddTask/widgets/pick_date_widget.dart';
+  static const String widgetsPickTime = 'lib/app/feature/AddTask/widgets/pick_time.dart';
+  static const String widgetsStatusWidget = 'lib/app/feature/DisplayTaskDetails/Widgets/status_widget.dart';
+  static const String widgetsTaskEditOption = 'lib/app/feature/DisplayTaskDetails/Widgets/task_edit_option.dart';
   static const String widgetsTextFieldWidget = 'lib/app/feature/AddTask/widgets/text_field_widget.dart';
+  static const String widgetsTimeBoxDetail = 'lib/app/feature/DisplayTaskDetails/Widgets/time_box_detail.dart';
+  static const String widgetsTimeDeatilsRowDayMonthDate = 'lib/app/feature/DisplayTaskDetails/Widgets/time_deatils_row_day_month_date.dart';
+  static const String widgetsTimeDetailsRowTime = 'lib/app/feature/DisplayTaskDetails/Widgets/time_details_row_time.dart';
 
 }

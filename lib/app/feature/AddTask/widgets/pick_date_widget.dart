@@ -10,57 +10,60 @@ class PickDateWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<DateTime?>(
-      valueListenable: dateSub,
-      builder: (context, dateVal, child) {
-        return InkWell(
-          onTap: () async {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ValueListenableBuilder<DateTime?>(
+        valueListenable: dateSub,
+        builder: (context, dateVal, child) {
+          return InkWell(
+            onTap: () async {
 
-            DateTime? date = await showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime.now(),
-              lastDate: DateTime(2050),
-              currentDate: DateTime.now(),
-              initialEntryMode: DatePickerEntryMode.calendar,
-              initialDatePickerMode: DatePickerMode.day,
-              builder: (context, child) {
-                return Theme(
-                  data: Theme.of(context).copyWith(
-                    colorScheme: ColorScheme.fromSwatch(
-                      primarySwatch: Colors.blueGrey,
-                      backgroundColor: Colors.lightBlue,
-                      cardColor: Colors.white,
-                    ),
-                  ),
-                  child: child!,
-                );
-              },
-            );
-
-            if (date != null) {
-              TimeOfDay? time = await showTimePicker(
+              DateTime? date = await showDatePicker(
                 context: context,
-                initialTime: TimeOfDay.now(),
+                initialDate: DateTime.now(),
+                firstDate: DateTime.now(),
+                lastDate: DateTime(2050),
+                currentDate: DateTime.now(),
+                initialEntryMode: DatePickerEntryMode.calendar,
+                initialDatePickerMode: DatePickerMode.day,
+                builder: (context, child) {
+                  return Theme(
+                    data: Theme.of(context).copyWith(
+                      colorScheme: ColorScheme.fromSwatch(
+                        primarySwatch: Colors.blueGrey,
+                        backgroundColor: Colors.lightBlue,
+                        cardColor: Colors.white,
+                      ),
+                    ),
+                    child: child!,
+                  );
+                },
               );
 
-              if (time != null) {
-                date = DateTime(
-                  date.year,
-                  date.month,
-                  date.day,
-                  time.hour,
-                  time.minute,
+              if (date != null) {
+                TimeOfDay? time = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
                 );
-                dateSub.value = date;
+
+                if (time != null) {
+                  date = DateTime(
+                    date.year,
+                    date.month,
+                    date.day,
+                    time.hour,
+                    time.minute,
+                  );
+                  dateSub.value = date;
+                }
               }
-            }
-          },
-          child: BuildDateTime(
-            data: dateVal != null ? convertDate(dateVal) : '',
-          ),
-        );
-      },
+            },
+            child: BuildDateTime(
+              data: dateVal != null ? convertDate(dateVal) : '',
+            ),
+          );
+        },
+      ),
     );
   }
 }

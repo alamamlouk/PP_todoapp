@@ -8,19 +8,39 @@ class CustomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
 
-      currentIndex: currentIndex,
-      onTap: onTap,
-      items: const [
-        BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home,color: Colors.red)),
-        BottomNavigationBarItem(
-            label: 'Calendar', icon: Icon(Icons.calendar_month,color: Colors.red,)),
-        BottomNavigationBarItem(
-            label: 'Add', icon: Icon(Icons.add_circle_outlined,color: Colors.red)),
-        BottomNavigationBarItem(label: 'Stat', icon: Icon(Icons.analytics,color: Colors.red)),
-        BottomNavigationBarItem(label: 'Settings', icon: Icon(Icons.settings,color: Colors.red)),
-      ],
+    return   BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      color: Colors.blue,
+      child: IconTheme(
+        data: IconThemeData(color: Theme.of(context).colorScheme.onPrimary),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            IconButton(
+              tooltip: 'Open navigation menu',
+              icon: const Icon(Icons.home),
+              onPressed: () =>onTap(currentIndex),
+            ),
+            IconButton(
+              tooltip: 'Search',
+              icon: const Icon(Icons.calendar_month),
+              onPressed: () =>onTap(currentIndex),
+            ),
+            Spacer(),
+            IconButton(
+              tooltip: 'Favorite',
+              icon: const Icon(Icons.analytics),
+              onPressed: () =>onTap(currentIndex),
+            ),
+            IconButton(
+              tooltip: 'Favorite',
+              icon: const Icon(Icons.settings),
+              onPressed: () =>onTap(currentIndex),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
