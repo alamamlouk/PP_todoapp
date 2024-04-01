@@ -16,14 +16,17 @@ class DisplayCategory extends StatefulWidget {
 
 class _DisplayCategoryState extends State<DisplayCategory> {
   GlobalCategoryService _globalCategoryService = GlobalCategoryService();
-  void deleteCategory(TaskCategory taskCategory)async{
-    String response =await _globalCategoryService.deleteCategory(taskCategory);
+
+  void deleteCategory(TaskCategory taskCategory) async {
+    String response = await _globalCategoryService.deleteCategory(taskCategory);
     print(response);
-    if(response=="Category deleted"){
-      Provider.of<TaskCategoryProvider>(context, listen: false).deleteCategory(taskCategory);
+    if (response == "Category deleted") {
+      Provider.of<TaskCategoryProvider>(context, listen: false)
+          .deleteCategory(taskCategory);
     }
   }
-  void updateCategory(TaskCategory taskCategory) async{
+
+  void updateCategory(TaskCategory taskCategory) async {
     // await _globalCategoryService.updateCategory(taskCategory);
   }
   @override
@@ -47,14 +50,17 @@ class _DisplayCategoryState extends State<DisplayCategory> {
   Widget _buildCategoryList() {
     return Center(
       child: Consumer<TaskCategoryProvider>(
-        builder: (context,taskCategoryProvider,child) {
+        builder: (context, taskCategoryProvider, child) {
           if (taskCategoryProvider.taskCategories.isEmpty) {
             return const CircularProgressIndicator();
-          }  else {
+          } else {
             return ListView.builder(
               itemCount: taskCategoryProvider.taskCategories.length,
               itemBuilder: (BuildContext context, int index) {
-                return DisplayCategoryItem(taskCategory: taskCategoryProvider.taskCategories[index], deleteCategory: deleteCategory, );
+                return DisplayCategoryItem(
+                  taskCategory: taskCategoryProvider.taskCategories[index],
+                  deleteCategory: deleteCategory,
+                );
               },
             );
           }

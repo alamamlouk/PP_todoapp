@@ -33,6 +33,7 @@ class _PlaningState extends State<Planing> {
       });
     }
   }
+
   @override
   void initState() {
     super.initState();
@@ -51,17 +52,19 @@ class _PlaningState extends State<Planing> {
               : Container(
                   child: SfCalendar(
                     view: CalendarView.day,
-                    timeSlotViewSettings: TimeSlotViewSettings(
-                      timeIntervalHeight: 100
-                    ),
+                    timeSlotViewSettings:
+                        TimeSlotViewSettings(timeIntervalHeight: 100),
                     dataSource: getCalendarDataSource(taskProvider.tasks),
-                    onTap: (calendarTapDetails){
-                      Task tappedTask = taskProvider.tasks.firstWhere((task) => task.taskName == calendarTapDetails.appointments![0].subject);
+                    onTap: (calendarTapDetails) {
+                      Task tappedTask = taskProvider.tasks.firstWhere((task) =>
+                          task.taskName ==
+                          calendarTapDetails.appointments![0].subject);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => TaskDetails(task:tappedTask)),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                TaskDetails(task: tappedTask)),
                       );
-
                     },
                   ),
                 );

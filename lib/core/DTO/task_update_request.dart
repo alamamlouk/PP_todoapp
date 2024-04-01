@@ -12,15 +12,16 @@ class TaskUpdateRequest {
   Map<String, dynamic> toJson() {
     return {
       'taskId': taskId,
-      'newStatus': newStatus.toString().split('.')[1], // Use a specific representation
+      'newStatus':
+          newStatus.toString().split('.')[1], // Use a specific representation
     };
   }
 
   factory TaskUpdateRequest.fromJson(Map<String, dynamic> json) {
     return TaskUpdateRequest(
       taskId: json['taskId'],
-      newStatus: Status.values
-          .firstWhere((status) => status.toString().split('.')[1] == json['newStatus']),
+      newStatus: Status.values.firstWhere(
+          (status) => status.toString().split('.')[1] == json['newStatus']),
     );
   }
 }

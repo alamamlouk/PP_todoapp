@@ -37,6 +37,7 @@ dependencies:
   font_awesome_flutter: ^10.7.0
   provider: ^6.1.1
   syncfusion_flutter_calendar: ^24.2.7
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -92,4 +93,11 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
     - lib/core/Entity/
+flutter_native_splash:
+  background_image: "assets/gradient.png"
+  android_12:
+    color: "#42a5f5"
+    image: "assets/list.png"
+
+
 

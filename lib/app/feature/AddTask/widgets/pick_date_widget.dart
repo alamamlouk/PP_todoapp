@@ -6,7 +6,7 @@ import 'build_date_time.dart';
 class PickDateWidget extends StatelessWidget {
   ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
 
-  PickDateWidget({Key? key,required this.dateSub}) : super(key: key);
+  PickDateWidget({Key? key, required this.dateSub}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,6 @@ class PickDateWidget extends StatelessWidget {
         builder: (context, dateVal, child) {
           return InkWell(
             onTap: () async {
-
               DateTime? date = await showDatePicker(
                 context: context,
                 initialDate: DateTime.now(),

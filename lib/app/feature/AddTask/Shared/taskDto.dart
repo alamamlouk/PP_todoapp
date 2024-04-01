@@ -1,15 +1,12 @@
 import '../../../../core/Entity/Task.dart';
 
-class TaskDto{
+class TaskDto {
   final String todoUserId;
   final String categoryId;
   final Task task;
 
-  TaskDto({
-   required this.todoUserId,
-   required this.task,
-   required this.categoryId
-});
+  TaskDto(
+      {required this.todoUserId, required this.task, required this.categoryId});
   Map<String, dynamic> toJson() {
     return {
       'todoUserId': todoUserId,
@@ -17,5 +14,4 @@ class TaskDto{
       'task': task.toJson(),
     };
   }
-
 }

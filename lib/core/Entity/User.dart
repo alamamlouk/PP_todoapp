@@ -1,7 +1,6 @@
-
 import 'Task.dart';
 
-class TodoUser{
+class TodoUser {
   late final String todoUserId;
   late final String email;
   late final String name;
@@ -17,7 +16,8 @@ class TodoUser{
   factory TodoUser.fromJson(Map<String, dynamic> json) {
     // Assuming 'tasks' is a list of JSON objects representing tasks
     final List<dynamic> jsonTasks = json['tasks'] ?? [];
-    final List<Task> taskList = jsonTasks.map((task) => Task.fromJson(task)).toList();
+    final List<Task> taskList =
+        jsonTasks.map((task) => Task.fromJson(task)).toList();
 
     return TodoUser(
       todoUserId: json['todoUser_id'] as String,

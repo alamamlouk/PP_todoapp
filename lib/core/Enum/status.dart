@@ -1,12 +1,5 @@
-enum Status {
-  DONE,
-  CANCELED,
-  IN_PROGRESS,
-  UNDONE,
-  TODO,
-  LATE
+enum Status { DONE, CANCELED, IN_PROGRESS, UNDONE, TODO, LATE }
 
-}
 extension StatusExtension on Status {
   String get formattedString {
     String statusString = this.toString().split('.')[1];

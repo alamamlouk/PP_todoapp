@@ -4,11 +4,12 @@ import 'package:intl/intl.dart';
 class TimeDetailsRowDayMonthDate extends StatelessWidget {
   final DateTime taskTime;
 
-  const TimeDetailsRowDayMonthDate({Key? key, required this.taskTime}) : super(key: key);
+  const TimeDetailsRowDayMonthDate({Key? key, required this.taskTime})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return    Row(
+    return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

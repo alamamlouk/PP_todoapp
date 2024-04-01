@@ -9,8 +9,8 @@ import 'package:todo_app/app/feature/AddTask/widgets/text_field_widget.dart';
 import 'package:todo_app/core/Entity/Task.dart';
 import 'package:todo_app/core/Entity/task_category.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_category_service.dart';
-
 import '../../../../core/Providers/task_provider.dart';
+import '../widgets/sub_task_add_widget.dart';
 
 class AddTaskScreen extends StatefulWidget {
   const AddTaskScreen({Key? key}) : super(key: key);
@@ -22,7 +22,8 @@ class AddTaskScreen extends StatefulWidget {
 class _AddTaskScreenState extends State<AddTaskScreen> {
   TextEditingController taskTitleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
-
+  TextEditingController subTaskTitle = TextEditingController();
+  TextEditingController subTaskDescription = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
   final ValueNotifier<DateTime?> dateSub1 = ValueNotifier(null);
@@ -31,16 +32,25 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   List<TaskCategory> categories = []; // List to store fetched categories
   TaskCategory? selectedCategory;
+  List<SubTaskAddWidget> subtasks=[];
 
   @override
   void initState() {
     super.initState();
     fetchCategories();
   }
-
+  void removeWidget(SubTaskAddWidget widget) {
+    setState(() {
+      int indexToRemove = subtasks.indexOf(widget);
+      if (indexToRemove != -1) {
+        subtasks.removeAt(indexToRemove);
+      }
+    });
+  }
   Future<void> fetchCategories() async {
     try {
-      final fetchedCategories = await globalCategoryService.fetchAllCategories();
+      final fetchedCategories =
+          await globalCategoryService.fetchAllCategories();
       setState(() {
         categories = fetchedCategories;
       });
@@ -83,6 +93,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 textEditingController: descriptionController,
                 hintText: "description",
               ),
+              ElevatedButton(onPressed: (){
+                  setState(() {
+                   subtasks.add(SubTaskAddWidget(deleteSubTask: removeWidget,));
+                  });
+              }, child: Icon(Icons.add)),
+              Column(
+                children: subtasks.map((widget) {
+                  return widget;
+                }).toList(),
+              ),
               // Display categories in a Wrap layout
               Wrap(
                 spacing: 8.0,
@@ -113,12 +133,13 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState!.validate() && selectedCategory != null) {
+                    if (_formKey.currentState!.validate() &&
+                        selectedCategory != null) {
                       String taskName = taskTitleController.text;
                       String taskDescription = descriptionController.text;
                       DateTime? taskStartTime = dateSub.value;
                       DateTime? taskEndTime = dateSub1.value;
-                      String userId = "65c0cf8db118436221ba47df";
+                      String userId = "6605f689968ba82e5b840ec0";
                       String categoryId = selectedCategory!.categoryId;
                       Task task = Task(
                         taskName: taskName,
@@ -126,14 +147,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         taskStartTime: taskStartTime,
                         taskEndTime: taskEndTime,
                       );
-                      TaskDto taskDTO = TaskDto(todoUserId: userId, task: task, categoryId: categoryId);
-                      Task newTask=await addTaskServices.addTask(taskDTO);
+                      TaskDto taskDTO = TaskDto(
+                          todoUserId: userId,
+                          task: task,
+                          categoryId: categoryId);
+                      Task newTask = await addTaskServices.addTask(taskDTO);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('task added')),
                       );
-                      Provider.of<TaskProvider>(context, listen: false).add(newTask);
-
-
+                      Provider.of<TaskProvider>(context, listen: false)
+                          .add(newTask);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Check data')),

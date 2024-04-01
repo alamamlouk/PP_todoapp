@@ -16,14 +16,14 @@ class _StatusWidgetState extends State<StatusWidget> {
       height: 40,
       margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
       decoration: BoxDecoration(
-        color: getStatusColor(),
-        borderRadius: BorderRadius.all(Radius.circular(10))
-      ),
+          color: getStatusColor(),
+          borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Center(child: Text(widget.status)),
     );
   }
-  Color getStatusColor(){
-    String status=widget.status.toLowerCase();
+
+  Color getStatusColor() {
+    String status = widget.status.toLowerCase();
     switch (status) {
       case 'done':
         return Colors.green;

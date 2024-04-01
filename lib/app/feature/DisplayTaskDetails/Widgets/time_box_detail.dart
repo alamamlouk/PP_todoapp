@@ -21,9 +21,12 @@ class TimeBoxDetail extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    TimeDetailsRowDayMonthDate(taskTime: taskStartTime,),
-                    TimeDetailsRowTime(taskTime: taskStartTime,)
-
+                    TimeDetailsRowDayMonthDate(
+                      taskTime: taskStartTime,
+                    ),
+                    TimeDetailsRowTime(
+                      taskTime: taskStartTime,
+                    )
                   ],
                 ),
                 Center(
@@ -31,14 +34,16 @@ class TimeBoxDetail extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    TimeDetailsRowDayMonthDate(taskTime: taskEndTime,),
-                    TimeDetailsRowTime(taskTime: taskEndTime,)
+                    TimeDetailsRowDayMonthDate(
+                      taskTime: taskEndTime,
+                    ),
+                    TimeDetailsRowTime(
+                      taskTime: taskEndTime,
+                    )
                   ],
                 ),
               ],
             ),
-
-
           ],
         ));
   }

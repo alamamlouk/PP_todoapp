@@ -20,7 +20,8 @@ class AddCategoryWidget extends StatelessWidget {
     }
 
     return AlertDialog(
-      title: Text(categoryToUpdate != null ? "Update category" : "Add a category"),
+      title:
+          Text(categoryToUpdate != null ? "Update category" : "Add a category"),
       content: Form(
         key: formKey,
         child: TextFormField(
@@ -43,11 +44,13 @@ class AddCategoryWidget extends StatelessWidget {
               if (categoryToUpdate != null) {
                 categoryToUpdate!.categoryName = categoryNameController.text;
                 await globalCategoryService.updateCategory(categoryToUpdate!);
-                Provider.of<TaskCategoryProvider>(context, listen: false).updateCategory(categoryToUpdate!);
-
+                Provider.of<TaskCategoryProvider>(context, listen: false)
+                    .updateCategory(categoryToUpdate!);
               } else {
-                TaskCategory cat = await globalCategoryService.addCategory(categoryNameController.value.text);
-                Provider.of<TaskCategoryProvider>(context, listen: false).add(cat);
+                TaskCategory cat = await globalCategoryService
+                    .addCategory(categoryNameController.value.text);
+                Provider.of<TaskCategoryProvider>(context, listen: false)
+                    .add(cat);
               }
 
               Navigator.of(context).pop();

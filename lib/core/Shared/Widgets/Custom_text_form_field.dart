@@ -84,7 +84,7 @@ class CustomTextFormField extends StatelessWidget {
   }
 
   Widget textFormFieldWidget(BuildContext context) => SizedBox(
-        width: width ,
+        width: width,
         child: TextFormField(
           scrollPadding:
               EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),

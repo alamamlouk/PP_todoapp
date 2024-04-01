@@ -5,23 +5,25 @@ import '../../../../core/Shared/Widgets/Custom_text_form_field.dart';
 class ParagraphTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final String hintText;
-  const ParagraphTextField({Key? key,required this.textEditingController,required this.hintText}) : super(key: key);
+
+  const ParagraphTextField(
+      {Key? key, required this.textEditingController, required this.hintText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(8),
       child: Material(
-        color:  Colors.transparent,
+        color: Colors.transparent,
         elevation: 20,
         child: CustomTextFormField(
-          controller:textEditingController ,
+          controller: textEditingController,
           hintText: hintText,
           autofocus: false,
           maxLines: 8,
-
-
         ),
-      ),);
+      ),
+    );
   }
 }
