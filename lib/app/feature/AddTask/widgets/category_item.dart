@@ -35,7 +35,7 @@ class _CategoryItemState extends State<CategoryItem> {
         ),
         child: Text(
           widget.text,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),

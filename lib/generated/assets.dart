@@ -4,8 +4,12 @@ class Assets {
 
   static const String categoryServiceGlobalCategoryService = 'lib/core/Shared/services/CategoryService/global_category_service.dart';
   static const String categoryServiceGlobalTaskServices = 'lib/core/Shared/services/CategoryService/global_task_services.dart';
+  static const String categoryServiceSubTaskServices = 'lib/core/Shared/services/CategoryService/sub_task_services.dart';
   static const String dTOFetchRecentTask = 'lib/core/DTO/Fetch_recent_task.dart';
+  static const String dTOSubTaskDTO = 'lib/core/DTO/SubTaskDTO.dart';
   static const String dTOTaskUpdateRequest = 'lib/core/DTO/task_update_request.dart';
+  static const String dailyTasksDailyTaskItemWidget = 'lib/app/feature/daily_tasks/daily_task_item_widget.dart';
+  static const String dailyTasksDailyTaskPage = 'lib/app/feature/daily_tasks/daily_task_page.dart';
   static const String entitySubTask = 'lib/core/Entity/sub_task.dart';
   static const String entityTask = 'lib/core/Entity/Task.dart';
   static const String entityTaskCategory = 'lib/core/Entity/task_category.dart';
@@ -14,14 +18,18 @@ class Assets {
   static const String functionGetCalendarDataSource = 'lib/app/feature/DisplayTasksInCalendar/Function/get_calendar_data_source.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String generatedGradient = 'lib/generated/gradient.png';
+  static const String homePageWidgetsAppBar = 'lib/app/feature/Home/HomePageWidgets/app_bar.dart';
   static const String homePageWidgetsBoxWithIconAndText  = 'lib/app/feature/Home/HomePageWidgets/BoxWithIconAndText .dart';
+  static const String homePageWidgetsRecentTasks = 'lib/app/feature/Home/HomePageWidgets/recent_tasks.dart';
   static const String homePageWidgetsTaskListItem = 'lib/app/feature/Home/HomePageWidgets/TaskListItem.dart';
+  static const String homePageWidgetsTaskStatus = 'lib/app/feature/Home/HomePageWidgets/task_status.dart';
   static const String libBaseUrl = 'lib/base_url.dart';
   static const String libMain = 'lib/main.dart';
   static const String pagesMasterPage = 'lib/Pages/master_page.dart';
   static const String pagesSplashScreen = 'lib/Pages/splash_screen.dart';
   static const String presentationDisplayCategory = 'lib/app/feature/Category/Presentation/display_category.dart';
   static const String presentationPlaning = 'lib/app/feature/DisplayTasksInCalendar/Presentation/planing.dart';
+  static const String providersSubTaskProvider = 'lib/core/Providers/sub_task_provider.dart';
   static const String providersTaskCategoryProvider = 'lib/core/Providers/task_category_provider.dart';
   static const String providersTaskProvider = 'lib/core/Providers/task_provider.dart';
   static const String screenAddTaskScreen = 'lib/app/feature/AddTask/Screen/add_task_screen.dart';
@@ -42,6 +50,8 @@ class Assets {
   static const String widgetsPickTime = 'lib/app/feature/AddTask/widgets/pick_time.dart';
   static const String widgetsStatusWidget = 'lib/app/feature/DisplayTaskDetails/Widgets/status_widget.dart';
   static const String widgetsSubTaskAddWidget = 'lib/app/feature/AddTask/widgets/sub_task_add_widget.dart';
+  static const String widgetsSubTaskItem = 'lib/app/feature/DisplayTaskDetails/Widgets/sub_task_item.dart';
+  static const String widgetsSubTasksList = 'lib/app/feature/DisplayTaskDetails/Widgets/sub_tasks_list.dart';
   static const String widgetsTaskEditOption = 'lib/app/feature/DisplayTaskDetails/Widgets/task_edit_option.dart';
   static const String widgetsTextFieldWidget = 'lib/app/feature/AddTask/widgets/text_field_widget.dart';
   static const String widgetsTimeBoxDetail = 'lib/app/feature/DisplayTaskDetails/Widgets/time_box_detail.dart';

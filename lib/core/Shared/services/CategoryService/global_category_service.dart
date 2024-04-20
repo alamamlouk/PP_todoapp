@@ -7,19 +7,22 @@ import '../../../../base_url.dart';
 import '../../../Entity/task_category.dart';
 
 class GlobalCategoryService {
-  Future<List<TaskCategory>> fetchAllCategories() async {
+  Future<dynamic> fetchAllCategories() async {
     try {
-      Response response = await http.get(Uri.parse("$baseUrl/categories"));
+      Response response = await http.get(Uri.parse("$baseUrl/categories/getAllCategories"));
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = json.decode(response.body);
         return jsonResponse
             .map((category) => TaskCategory.fromJson(category))
             .toList();
-      } else {
+      } else if(response.statusCode==204){
+
+        return " No category found " ;
+      }
+      else {
         throw Exception('Failed to load category');
       }
     } catch (error) {
-      print('Error in fetchAllCategories: $error');
       rethrow;
     }
   }
@@ -27,23 +30,17 @@ class GlobalCategoryService {
   Future<TaskCategory> addCategory(String categoryName) async {
     final headers = {'Content-Type': 'application/json'};
     TaskCategory addedCategory = TaskCategory(categoryId: "", categoryName: "");
-
     try {
       final body = jsonEncode({'categoryName': categoryName});
-      print("body $body");
       Response response = await http.post(
           Uri.parse("$baseUrl/categories/addCategory"),
           headers: headers,
           body: body);
       if (response.statusCode == 200) {
-        print('category added successfully');
-
         final Map<String, dynamic> responseData = jsonDecode(response.body);
         addedCategory = TaskCategory.fromJson(responseData);
         return addedCategory;
       } else {
-        print('Failed to add category. Status code: ${response.statusCode}');
-        print('Response body: ${response.body}');
         return addedCategory;
       }
     } catch (error) {

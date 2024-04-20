@@ -12,8 +12,8 @@ class DataSource extends CalendarDataSource {
 DataSource getCalendarDataSource(List<Task> tasks) {
   final List<Appointment> appointments = tasks.map((task) {
     return Appointment(
-      startTime: task.taskStartTime ?? DateTime.now(),
-      endTime: task.taskEndTime ?? DateTime.now(),
+      startTime: task.whenTheTaskWillStart ?? DateTime.now(),
+      endTime: task.whenTheTaskWillBeDone ?? DateTime.now(),
       subject: task.taskName,
       color: Colors.blue, // Customize color based on your requirements
     );

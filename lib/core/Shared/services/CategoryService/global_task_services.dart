@@ -23,7 +23,7 @@ class GlobalTaskServices {
     }
   }
 
-  Future<Task> updateTaskStatus(TaskUpdateRequest updateRequest) async {
+  Future<String> updateTaskStatus(TaskUpdateRequest updateRequest) async {
     try {
       final url = Uri.parse('$baseUrl/Task/updateStatus');
       final response = await http.patch(
@@ -34,7 +34,7 @@ class GlobalTaskServices {
         body: jsonEncode(updateRequest.toJson()),
       );
       if (response.statusCode == 200) {
-        return Task.fromJson(jsonDecode(response.body));
+        return response.body;
       } else {
         throw Exception(
             'Failed to update task status. Status Code: ${response.statusCode}, Response Body: ${response.body}');
@@ -68,7 +68,6 @@ class GlobalTaskServices {
     const String url = "$baseUrl/Task/updateTask";
     final Map<String, dynamic> requestBody = task.toJson();
     final Map<String, String> headers = {'Content-Type': 'application/json'};
-    print(requestBody);
     try {
       final response = await http.patch(
         Uri.parse(url),
@@ -85,4 +84,21 @@ class GlobalTaskServices {
       return "Exception occurred: $error";
     }
   }
+  Future<void> uploadImage(String image,String taskId) async {
+    if (image == null) {
+      return;
+    }
+    var request = http.MultipartRequest(
+        'PATCH',
+        Uri.parse('$baseUrl/Task/addImage/$taskId'));
+    request.files.add(await http.MultipartFile.fromPath('file', image));
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print('Image uploaded successfully');
+    } else {
+      print('Failed to upload image. Status code: ${response.statusCode}');
+    }
+  }
+
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/Pages/master_page.dart';
-import 'package:todo_app/Pages/splash_screen.dart';
+import 'package:todo_app/core/Providers/sub_task_provider.dart';
 import 'package:todo_app/core/Providers/task_category_provider.dart';
 import 'package:todo_app/core/Providers/task_provider.dart';
+
 import 'core/Entity/Task.dart';
 import 'core/Entity/task_category.dart';
 import 'core/Shared/services/CategoryService/global_category_service.dart';
@@ -13,6 +14,7 @@ void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => TaskProvider()),
     ChangeNotifierProvider(create: (_) => TaskCategoryProvider()),
+    ChangeNotifierProvider(create: (_)=>SubTaskProvider()),
   ], child: const MyApp()));
 }
 
@@ -46,12 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    TaskProvider taskProvider =
-        Provider.of<TaskProvider>(context, listen: false);
-    TaskCategoryProvider taskCategoryProvider =
-        Provider.of<TaskCategoryProvider>(context, listen: false);
-    fetchTasks(taskProvider);
-    fetchTaskCategory(taskCategoryProvider);
+    Future.delayed(Duration.zero, () {
+      TaskProvider taskProvider =
+      Provider.of<TaskProvider>(context, listen: false);
+      TaskCategoryProvider taskCategoryProvider =
+      Provider.of<TaskCategoryProvider>(context, listen: false);
+      taskProvider.setIsLoading(true);
+      fetchTasks(taskProvider);
+      fetchTaskCategory(taskCategoryProvider);
+    });
   }
 
   Future<void> fetchTasks(TaskProvider taskProvider) async {
@@ -61,19 +66,26 @@ class _MyHomePageState extends State<MyHomePage> {
     } catch (error) {
       print('Error fetching tasks: $error');
     }
+    finally{
+      taskProvider.setIsLoading(false);
+    }
   }
 
   Future<void> fetchTaskCategory(
       TaskCategoryProvider taskCategoryProvider) async {
     try {
-      List<TaskCategory> fetchedTaskCategories =
+      dynamic fetchedTaskCategories =
           await _globalCategoryService.fetchAllCategories();
-      taskCategoryProvider.setTaskCategory(fetchedTaskCategories);
+      if(fetchedTaskCategories == " No category found "){
+        return;
+      }else{
+        taskCategoryProvider.setTaskCategory(fetchedTaskCategories as List<TaskCategory>);
+      }
+
     } catch (error) {
-      print('Error fetching categories: $error');
+      rethrow;
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(body: MasterPage());

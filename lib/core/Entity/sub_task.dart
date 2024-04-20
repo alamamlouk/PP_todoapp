@@ -4,19 +4,18 @@ class SubTask{
   final String? subTaskId;
   final String subTaskName;
   final String subTaskDescription;
-
-  final DateTime subTaskFinishedOn;
-  final DateTime subTaskCreatedDate;
+  dynamic subTaskFinishedOn;
+  DateTime? subTaskCreatedDate;
   String status;
-  final Task task;
+  Task? task;
 
   SubTask({
     this.subTaskId,
     required this.subTaskName,
     required this.subTaskDescription,
-    required this.subTaskFinishedOn,
-    required this.subTaskCreatedDate,
-    required this.task,
+    this.subTaskFinishedOn,
+    this.subTaskCreatedDate,
+    this.task,
     this.status = 'TODO',
 
 
@@ -27,10 +26,9 @@ class SubTask{
       subTaskId: json['subTaskId'],
       subTaskName: json['subTaskName'],
       subTaskDescription: json['subTaskDescription'],
-      subTaskFinishedOn: DateTime.parse(json['subTaskFinishedOn']),
-      subTaskCreatedDate: DateTime.parse(json['subTaskCreatedDate']),
+      subTaskFinishedOn: json['subTaskFinishedOn']!=null?DateTime.parse(json['subTaskFinishedOn']):null,
+      subTaskCreatedDate: DateTime.parse(json['subTaskModificationDate']),
       status: json['status'],
-      task: Task.fromJson(json['task']),
     );
   }
 
@@ -38,10 +36,9 @@ class SubTask{
     'subTaskId': subTaskId,
     'subTaskName': subTaskName,
     'subTaskDescription': subTaskDescription,
-    'subTaskFinishedOn': subTaskFinishedOn.toIso8601String(),
-    'subTaskCreatedDate': subTaskCreatedDate.toIso8601String(),
+    'subTaskFinishedOn': subTaskFinishedOn?.toIso8601String(),
+    'subTaskModificationDate': subTaskCreatedDate?.toIso8601String(),
     'status': status,
-    'task': task.toJson(),
   };
 
 

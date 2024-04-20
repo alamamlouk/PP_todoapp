@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/app/feature/DisplayTaskDetails/Widgets/sub_tasks_list.dart';
 import 'package:todo_app/app/feature/DisplayTaskDetails/Widgets/task_edit_option.dart';
 import 'package:todo_app/core/Providers/task_provider.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
+
 import '../../../../core/Entity/Task.dart';
 import '../Widgets/status_widget.dart';
 import '../Widgets/time_box_detail.dart';
@@ -36,11 +38,12 @@ class _TaskDetailsState extends State<TaskDetails> {
       taskId: widget.task.taskId,
       taskName: taskNameController.text,
       taskDescription: widget.task.taskDescription,
-      taskStartTime: widget.task.taskStartTime,
-      taskEndTime: widget.task.taskEndTime,
+      whenTheTaskWillStart: widget.task.whenTheTaskWillStart,
+      whenTheTaskWillBeDone: widget.task.whenTheTaskWillBeDone,
       category: widget.task.category,
       status: widget.task.status,
     );
+    globalTaskServices.updateTask(updatedTask);
     Provider.of<TaskProvider>(context, listen: false).updateTask(updatedTask);
   }
 
@@ -72,13 +75,16 @@ class _TaskDetailsState extends State<TaskDetails> {
                   widget.task.category!.categoryName,
                   style: const TextStyle(color: Colors.grey, fontSize: 15),
                 ),
+
                 Container(
                     margin: const EdgeInsets.only(top: 10),
                     child: Text(widget.task.taskDescription)),
                 TimeBoxDetail(
-                  taskStartTime: widget.task.taskStartTime!,
-                  taskEndTime: widget.task.taskEndTime!,
+                  taskStartTime: widget.task.whenTheTaskWillStart!,
+                  taskEndTime: widget.task.whenTheTaskWillBeDone!,
                 ),
+                if (widget.task.subTasks != null)
+                  SubTasksList(subTasks: widget.task.subTasks!, taskId: widget.task.taskId!,)
 
               ],
             ),

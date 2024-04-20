@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -7,8 +9,11 @@ import 'package:todo_app/app/feature/AddTask/widgets/paragraph_text_field.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/pick_date_widget.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/text_field_widget.dart';
 import 'package:todo_app/core/Entity/Task.dart';
+import 'package:todo_app/core/Entity/sub_task.dart';
 import 'package:todo_app/core/Entity/task_category.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_category_service.dart';
+import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
+
 import '../../../../core/Providers/task_provider.dart';
 import '../widgets/sub_task_add_widget.dart';
 
@@ -20,6 +25,9 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
+
+
+
   TextEditingController taskTitleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController subTaskTitle = TextEditingController();
@@ -29,21 +37,23 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final ValueNotifier<DateTime?> dateSub1 = ValueNotifier(null);
   AddTaskServices addTaskServices = AddTaskServices();
   GlobalCategoryService globalCategoryService = GlobalCategoryService();
-
+  GlobalTaskServices globalTaskServices = GlobalTaskServices();
   List<TaskCategory> categories = []; // List to store fetched categories
   TaskCategory? selectedCategory;
-  List<SubTaskAddWidget> subtasks=[];
+  List<SubTaskAddWidget> subtasksWidget=[];
+  List<SubTask> subTasks = [];
 
   @override
   void initState() {
     super.initState();
     fetchCategories();
   }
+
   void removeWidget(SubTaskAddWidget widget) {
     setState(() {
-      int indexToRemove = subtasks.indexOf(widget);
+      int indexToRemove = subtasksWidget.indexOf(widget);
       if (indexToRemove != -1) {
-        subtasks.removeAt(indexToRemove);
+        subtasksWidget.removeAt(indexToRemove);
       }
     });
   }
@@ -95,11 +105,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               ),
               ElevatedButton(onPressed: (){
                   setState(() {
-                   subtasks.add(SubTaskAddWidget(deleteSubTask: removeWidget,));
+                   subtasksWidget.add(SubTaskAddWidget(deleteSubTask: removeWidget,));
                   });
-              }, child: Icon(Icons.add)),
+              }, child: const Icon(Icons.add)),
               Column(
-                children: subtasks.map((widget) {
+                children: subtasksWidget.map((widget) {
                   return widget;
                 }).toList(),
               ),
@@ -129,6 +139,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   );
                 }).toList(),
               ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(
@@ -144,13 +155,22 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       Task task = Task(
                         taskName: taskName,
                         taskDescription: taskDescription,
-                        taskStartTime: taskStartTime,
-                        taskEndTime: taskEndTime,
+                        whenTheTaskWillStart: taskStartTime,
+                        whenTheTaskWillBeDone: taskEndTime,
                       );
                       TaskDto taskDTO = TaskDto(
                           todoUserId: userId,
                           task: task,
                           categoryId: categoryId);
+                      if(subtasksWidget.isNotEmpty){
+                        for (SubTaskAddWidget subtask in subtasksWidget) {
+                          String subTaskTitle = subtask.subTaskTitle.text;
+                          String subTaskDescription = subtask.subTaskDescription.text;
+                          SubTask newSubtask=SubTask(subTaskName: subTaskTitle, subTaskDescription: subTaskDescription);
+                          subTasks.add(newSubtask);
+                        }
+                        taskDTO.subTasks=subTasks;
+                      }
                       Task newTask = await addTaskServices.addTask(taskDTO);
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('task added')),

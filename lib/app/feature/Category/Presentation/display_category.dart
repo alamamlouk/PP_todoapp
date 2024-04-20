@@ -51,8 +51,8 @@ class _DisplayCategoryState extends State<DisplayCategory> {
     return Center(
       child: Consumer<TaskCategoryProvider>(
         builder: (context, taskCategoryProvider, child) {
-          if (taskCategoryProvider.taskCategories.isEmpty) {
-            return const CircularProgressIndicator();
+            if (taskCategoryProvider.taskCategories.isEmpty) {
+            return const Text('No category found');
           } else {
             return ListView.builder(
               itemCount: taskCategoryProvider.taskCategories.length,

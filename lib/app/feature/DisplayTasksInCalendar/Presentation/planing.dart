@@ -16,7 +16,7 @@ class Planing extends StatefulWidget {
 }
 
 class _PlaningState extends State<Planing> {
-  GlobalTaskServices _globalTaskServices = GlobalTaskServices();
+  final GlobalTaskServices _globalTaskServices = GlobalTaskServices();
   bool isLoading = false;
 
   Future<void> fetchTasks(TaskProvider taskProvider) async {
@@ -34,12 +34,6 @@ class _PlaningState extends State<Planing> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    TaskProvider taskProvider =
-        Provider.of<TaskProvider>(context, listen: false);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,26 +42,25 @@ class _PlaningState extends State<Planing> {
       body: Consumer<TaskProvider>(
         builder: (context, taskProvider, _) {
           return isLoading
-              ? Center(child: CircularProgressIndicator())
-              : Container(
-                  child: SfCalendar(
-                    view: CalendarView.day,
-                    timeSlotViewSettings:
-                        TimeSlotViewSettings(timeIntervalHeight: 100),
-                    dataSource: getCalendarDataSource(taskProvider.tasks),
-                    onTap: (calendarTapDetails) {
-                      Task tappedTask = taskProvider.tasks.firstWhere((task) =>
-                          task.taskName ==
-                          calendarTapDetails.appointments![0].subject);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                TaskDetails(task: tappedTask)),
-                      );
-                    },
-                  ),
-                );
+              ? const Center(child: CircularProgressIndicator())
+              : SfCalendar(
+                view: CalendarView.day,
+                timeSlotViewSettings:
+                    const TimeSlotViewSettings(timeIntervalHeight: 100),
+                dataSource: getCalendarDataSource(taskProvider.tasks),
+                onTap: (calendarTapDetails) {
+                  
+                  Task tappedTask = taskProvider.tasks.firstWhere((task) =>
+                      task.taskName ==
+                      calendarTapDetails.appointments![0].subject);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            TaskDetails(task: tappedTask)),
+                  );
+                },
+              );
         },
       ),
     );
