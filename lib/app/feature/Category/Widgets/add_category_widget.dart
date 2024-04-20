@@ -26,7 +26,7 @@ class AddCategoryWidget extends StatelessWidget {
         key: formKey,
         child: TextFormField(
           controller: categoryNameController,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             hintText: 'Enter category name',
           ),
           validator: (value) {
