@@ -18,6 +18,10 @@ class ParagraphTextField extends StatelessWidget {
         color: Colors.transparent,
         elevation: 20,
         child: CustomTextFormField(
+          fillColor: Colors.white,
+          borderDecoration: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20)
+          ),
           controller: textEditingController,
           hintText: hintText,
           autofocus: false,

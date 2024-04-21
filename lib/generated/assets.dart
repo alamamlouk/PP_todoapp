@@ -20,7 +20,9 @@ class Assets {
   static const String generatedGradient = 'lib/generated/gradient.png';
   static const String homePageWidgetsAppBar = 'lib/app/feature/Home/HomePageWidgets/app_bar.dart';
   static const String homePageWidgetsBoxWithIconAndText  = 'lib/app/feature/Home/HomePageWidgets/BoxWithIconAndText .dart';
+  static const String homePageWidgetsFunctions = 'lib/app/feature/Home/HomePageWidgets/functions.dart';
   static const String homePageWidgetsRecentTasks = 'lib/app/feature/Home/HomePageWidgets/recent_tasks.dart';
+  static const String homePageWidgetsStatusWidget = 'lib/app/feature/Home/HomePageWidgets/status_widget.dart';
   static const String homePageWidgetsTaskListItem = 'lib/app/feature/Home/HomePageWidgets/TaskListItem.dart';
   static const String homePageWidgetsTaskStatus = 'lib/app/feature/Home/HomePageWidgets/task_status.dart';
   static const String libBaseUrl = 'lib/base_url.dart';
@@ -44,11 +46,11 @@ class Assets {
   static const String widgetsCategoryItem = 'lib/app/feature/AddTask/widgets/category_item.dart';
   static const String widgetsCustomTextFormField = 'lib/core/Shared/Widgets/Custom_text_form_field.dart';
   static const String widgetsDisplayCategoryItem = 'lib/app/feature/Category/Widgets/display_category_item.dart';
+  static const String widgetsDropDownStatus = 'lib/app/feature/DisplayTaskDetails/Widgets/drop_down_status.dart';
   static const String widgetsNavigationBar = 'lib/core/Shared/Widgets/navigation_bar.dart';
   static const String widgetsParagraphTextField = 'lib/app/feature/AddTask/widgets/paragraph_text_field.dart';
   static const String widgetsPickDateWidget = 'lib/app/feature/AddTask/widgets/pick_date_widget.dart';
   static const String widgetsPickTime = 'lib/app/feature/AddTask/widgets/pick_time.dart';
-  static const String widgetsStatusWidget = 'lib/app/feature/DisplayTaskDetails/Widgets/status_widget.dart';
   static const String widgetsSubTaskAddWidget = 'lib/app/feature/AddTask/widgets/sub_task_add_widget.dart';
   static const String widgetsSubTaskItem = 'lib/app/feature/DisplayTaskDetails/Widgets/sub_task_item.dart';
   static const String widgetsSubTasksList = 'lib/app/feature/DisplayTaskDetails/Widgets/sub_tasks_list.dart';

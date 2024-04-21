@@ -11,15 +11,33 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+              blurRadius: 8,
+              offset: Offset(0, 15),
+              color: Colors.grey.withOpacity(.6),
+              spreadRadius: -5
+          ),
+        ],
+      ),
+      margin: EdgeInsets.all(10),
       child: Material(
         color: Colors.transparent,
-        elevation: 20,
         child: CustomTextFormField(
+
+          borderDecoration: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20)
+          ),
+
+          fillColor: Colors.white,
           controller: textEditingController,
           hintText: hintText,
           autofocus: false,
+          suffix: const Icon(Icons.clear),
+          prefix: const Icon(Icons.task),
+      
         ),
       ),
     );

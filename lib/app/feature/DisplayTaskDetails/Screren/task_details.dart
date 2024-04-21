@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/app/feature/DisplayTaskDetails/Widgets/drop_down_status.dart';
 import 'package:todo_app/app/feature/DisplayTaskDetails/Widgets/sub_tasks_list.dart';
 import 'package:todo_app/app/feature/DisplayTaskDetails/Widgets/task_edit_option.dart';
 import 'package:todo_app/core/Providers/task_provider.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
 
 import '../../../../core/Entity/Task.dart';
-import '../Widgets/status_widget.dart';
 import '../Widgets/time_box_detail.dart';
 
 class TaskDetails extends StatefulWidget {
@@ -42,9 +42,15 @@ class _TaskDetailsState extends State<TaskDetails> {
       whenTheTaskWillBeDone: widget.task.whenTheTaskWillBeDone,
       category: widget.task.category,
       status: widget.task.status,
+      subTasks: widget.task.subTasks,
+      percentage: widget.task.percentage,
+      dailyTask: widget.task.dailyTask,
+      taskCreatedDate: widget.task.taskCreatedDate,
+      theTimeTheTaskWasFinishedOn: widget.task.theTimeTheTaskWasFinishedOn,
     );
     globalTaskServices.updateTask(updatedTask);
     Provider.of<TaskProvider>(context, listen: false).updateTask(updatedTask);
+    print(updatedTask.subTasks);
   }
 
   @override
@@ -54,8 +60,7 @@ class _TaskDetailsState extends State<TaskDetails> {
       appBar: AppBar(
         title: const Text("details"),
         actions: <Widget>[
-          StatusWidget(
-              status: widget.task.status.toLowerCase().replaceAll('_', ' ')),
+          DropDownStatus(taskId: widget.task.taskId!, status: widget.task.status)
         ],
       ),
       body: Container(

@@ -5,8 +5,11 @@ import 'build_date_time.dart';
 
 class PickDateWidget extends StatelessWidget {
   ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
+  late IconData icon;
+  String hintText;
 
-  PickDateWidget({Key? key, required this.dateSub}) : super(key: key);
+
+  PickDateWidget({Key? key, required this.dateSub,required this.icon,required this.hintText}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class PickDateWidget extends StatelessWidget {
               }
             },
             child: BuildDateTime(
-              data: dateVal != null ? convertDate(dateVal) : '',
+              data: dateVal != null ? convertDate(dateVal) : hintText, fontAwesomeIcons:icon, hintTextColor: dateVal != null?Colors.black:Colors.grey ,
             ),
           );
         },

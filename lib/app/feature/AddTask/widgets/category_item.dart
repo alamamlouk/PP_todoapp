@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/core/Entity/task_category.dart';
 
 class CategoryItem extends StatefulWidget {
-  final String text;
+  final TaskCategory category;
+  final Function(TaskCategory) callBack;
 
-  const CategoryItem({Key? key, required this.text}) : super(key: key);
+  const CategoryItem({Key? key, required this.category, required this.callBack}) : super(key: key);
 
   @override
   _CategoryItemState createState() => _CategoryItemState();
@@ -24,6 +26,7 @@ class _CategoryItemState extends State<CategoryItem> {
     return GestureDetector(
       onTap: () {
         _changeColor();
+        widget.callBack(widget.category);
       },
       child: Container(
         width: 20,
@@ -34,7 +37,7 @@ class _CategoryItemState extends State<CategoryItem> {
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Text(
-          widget.text,
+          widget.category.categoryName,
           style: const TextStyle(
             color: Colors.white,
           ),

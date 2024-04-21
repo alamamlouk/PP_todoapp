@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +9,7 @@ import 'package:todo_app/app/feature/AddTask/widgets/text_field_widget.dart';
 import 'package:todo_app/core/Entity/Task.dart';
 import 'package:todo_app/core/Entity/sub_task.dart';
 import 'package:todo_app/core/Entity/task_category.dart';
+import 'package:todo_app/core/Providers/task_category_provider.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_category_service.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
 
@@ -25,9 +24,6 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-
-
-
   TextEditingController taskTitleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController subTaskTitle = TextEditingController();
@@ -40,7 +36,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   GlobalTaskServices globalTaskServices = GlobalTaskServices();
   List<TaskCategory> categories = []; // List to store fetched categories
   TaskCategory? selectedCategory;
-  List<SubTaskAddWidget> subtasksWidget=[];
+  List<SubTaskAddWidget> subtasksWidget = [];
   List<SubTask> subTasks = [];
 
   @override
@@ -57,10 +53,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       }
     });
   }
+
   Future<void> fetchCategories() async {
     try {
       final fetchedCategories =
-          await globalCategoryService.fetchAllCategories();
+      Provider.of<TaskCategoryProvider>(context, listen: false)
+          .taskCategories;
       setState(() {
         categories = fetchedCategories;
       });
@@ -74,6 +72,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Add a new Task"),
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(20),
           child: IconButton(
@@ -95,51 +94,124 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             children: [
               TextFieldWidget(
                 textEditingController: taskTitleController,
-                hintText: "hintText",
+                hintText: "Task Name",
               ),
-              PickDateWidget(dateSub: dateSub),
-              PickDateWidget(dateSub: dateSub1),
+              PickDateWidget(
+                dateSub: dateSub,
+                icon: FontAwesomeIcons.hourglassStart,
+                hintText: "When the task will Start on",
+              ),
+              PickDateWidget(
+                dateSub: dateSub1,
+                icon: FontAwesomeIcons.hourglassEnd,
+                hintText: "When the task will finish",
+              ),
               ParagraphTextField(
                 textEditingController: descriptionController,
                 hintText: "description",
               ),
-              ElevatedButton(onPressed: (){
-                  setState(() {
-                   subtasksWidget.add(SubTaskAddWidget(deleteSubTask: removeWidget,));
-                  });
-              }, child: const Icon(Icons.add)),
               Column(
                 children: subtasksWidget.map((widget) {
                   return widget;
                 }).toList(),
               ),
-              // Display categories in a Wrap layout
-              Wrap(
-                spacing: 8.0,
-                children: categories.map((TaskCategory category) {
-                  bool isSelected = category == selectedCategory;
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedCategory = isSelected ? null : category;
-                      });
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: isSelected ? Colors.green : Colors.white,
-                        border: Border.all(
-                          color: Colors.blueGrey,
-                          width: 1.5,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Text(category.categoryName),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            subtasksWidget.add(SubTaskAddWidget(
+                              deleteSubTask: removeWidget,
+                            ));
+                          });
+                        },
+                        child: const Row(
+                          children: [
+                            Icon(Icons.add),
+                            Text("Add Sub Task"),
+                          ],
+                        )),
+                    const SizedBox(
+                      width: 10,
                     ),
-                  );
-                }).toList(),
+                    if(subtasksWidget.isNotEmpty)
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {subtasksWidget.clear();});
+                        },
+                        child: const Row(
+                          children: [
+                            Icon(Icons.delete_forever),
+                            Text("Delete all sub tasks"),
+                          ],
+                        )),
+                  ],
+                ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {});
+                        },
+                        child: const Row(
+                          children: [
+                            Icon(Icons.attach_file),
+                            Text("Add attachment "),
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Column(
 
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Categories"),
+                    Wrap(
+                      runSpacing: 10,
+                      spacing: 8.0,
+                      children: categories.map((TaskCategory category) {
+                        bool isSelected = category == selectedCategory;
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedCategory = isSelected ? null : category;
+                            });
+                          },
+                          child: Container(
+
+                            padding: const EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              color: isSelected ? Colors.green : Colors.grey.shade200
+                              ,
+                              border: Border.all(
+                                color: Colors.white,
+                                width: 1.5,
+                              ),
+                              boxShadow: [
+                                BoxShadow(  blurRadius: 8,
+                                    offset: Offset(0, 15),
+                                    color: Colors.grey.withOpacity(.6),
+                                    spreadRadius: -5)
+                              ],
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Text(category.categoryName),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(
@@ -162,14 +234,17 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           todoUserId: userId,
                           task: task,
                           categoryId: categoryId);
-                      if(subtasksWidget.isNotEmpty){
+                      if (subtasksWidget.isNotEmpty) {
                         for (SubTaskAddWidget subtask in subtasksWidget) {
                           String subTaskTitle = subtask.subTaskTitle.text;
-                          String subTaskDescription = subtask.subTaskDescription.text;
-                          SubTask newSubtask=SubTask(subTaskName: subTaskTitle, subTaskDescription: subTaskDescription);
+                          String subTaskDescription =
+                              subtask.subTaskDescription.text;
+                          SubTask newSubtask = SubTask(
+                              subTaskName: subTaskTitle,
+                              subTaskDescription: subTaskDescription);
                           subTasks.add(newSubtask);
                         }
-                        taskDTO.subTasks=subTasks;
+                        taskDTO.subTasks = subTasks;
                       }
                       Task newTask = await addTaskServices.addTask(taskDTO);
                       ScaffoldMessenger.of(context).showSnackBar(

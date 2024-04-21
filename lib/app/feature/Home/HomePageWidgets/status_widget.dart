@@ -11,31 +11,32 @@ class StatusWidget extends StatefulWidget {
 class _StatusWidgetState extends State<StatusWidget> {
   @override
   Widget build(BuildContext context) {
+    String statusSplited = widget.status.replaceAll('_', ' ');
+    String status=statusSplited.substring(0,1).toUpperCase()+statusSplited.substring(1).toLowerCase();
     return Container(
       width: 100,
       height: 40,
       margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
       decoration: BoxDecoration(
-          color: getStatusColor(),
+          color: getStatusColor(status),
           borderRadius: BorderRadius.all(Radius.circular(10))),
-      child: Center(child: Text(widget.status)),
+      child: Center(child: Text(status)),
     );
   }
 
-  Color getStatusColor() {
-    String status = widget.status.toLowerCase();
+  Color getStatusColor(String status) {
     switch (status) {
-      case 'done':
+      case 'Done':
         return Colors.green;
-      case 'canceled':
+      case 'Canceled':
         return Colors.red;
-      case 'in progress':
+      case 'In progress':
         return Colors.orange;
-      case 'undone':
+      case 'Undone':
         return Colors.yellow;
-      case 'todo':
+      case 'Todo':
         return Colors.grey;
-      case 'late':
+      case 'Late':
         return Colors.blue;
       default:
         return Colors.grey;

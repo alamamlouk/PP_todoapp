@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     Key? key,
     this.alignment,
     this.width,
@@ -109,7 +109,7 @@ class CustomTextFormField extends StatelessWidget {
         suffixIconConstraints: suffixConstraints,
         isDense: true,
         contentPadding: contentPadding ??
-            EdgeInsets.symmetric(
+            const EdgeInsets.symmetric(
               horizontal: 13,
               vertical: 15,
             ),
@@ -117,26 +117,26 @@ class CustomTextFormField extends StatelessWidget {
         filled: filled,
         border: borderDecoration ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(13),
-              borderSide: BorderSide(
+              borderRadius: BorderRadius.circular(1),
+              borderSide: const BorderSide(
                 color: Colors.black38,
-                width: 1,
+                width: 12,
               ),
             ),
         enabledBorder: borderDecoration ??
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(13),
-              borderSide: BorderSide(
+              borderSide: const BorderSide(
                 color: Colors.black38,
                 width: 1,
               ),
             ),
-        focusedBorder: borderDecoration ??
+        focusedBorder:
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(13),
-              borderSide: BorderSide(
-                color: Colors.black38,
-                width: 1,
+              borderSide: const BorderSide(
+                color: Colors.green,
+                width: 2,
               ),
             ),
       );
