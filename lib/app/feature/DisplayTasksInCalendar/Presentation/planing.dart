@@ -49,7 +49,7 @@ class _PlaningState extends State<Planing> {
                     const TimeSlotViewSettings(timeIntervalHeight: 100),
                 dataSource: getCalendarDataSource(taskProvider.tasks),
                 onTap: (calendarTapDetails) {
-                  
+                  print(calendarTapDetails.appointments![0].subject);
                   Task tappedTask = taskProvider.tasks.firstWhere((task) =>
                       task.taskName ==
                       calendarTapDetails.appointments![0].subject);

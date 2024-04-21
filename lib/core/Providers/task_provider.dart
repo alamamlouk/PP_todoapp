@@ -11,6 +11,7 @@ class TaskProvider extends ChangeNotifier {
 
   void setTasks(List<Task> tasks) {
     _tasks = tasks;
+    _tasks.sort((a, b) => b.taskCreatedDate.compareTo(a.taskCreatedDate));
     notifyListeners();
   }
   void setIsLoading(bool loading){
@@ -20,6 +21,7 @@ class TaskProvider extends ChangeNotifier {
 
   void add(Task task) {
     _tasks.add(task);
+    _tasks.sort((a, b) => b.taskCreatedDate.compareTo(a.taskCreatedDate));
     notifyListeners();
   }
 

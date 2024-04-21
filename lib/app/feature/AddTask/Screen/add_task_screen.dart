@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/app/feature/AddTask/Services/Services.dart';
 import 'package:todo_app/app/feature/AddTask/Shared/taskDto.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/category_item.dart';
+import 'package:todo_app/app/feature/AddTask/widgets/list_of_categories.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/paragraph_text_field.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/pick_date_widget.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/text_field_widget.dart';
@@ -54,7 +55,11 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       }
     });
   }
-
+  void getSelectedCategory(TaskCategory taskCategory){
+    setState(() {
+      selectedCategory= taskCategory;
+    });
+  }
   Future<void> fetchCategories() async {
     try {
       final fetchedCategories =
@@ -74,6 +79,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       selectedCategory = isSelected ? null : category;
     });
   }
+  bool light = false;
 
   @override
   Widget build(BuildContext context) {
@@ -175,29 +181,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Column(
+              ListOfCategories(categories: categories, callBack: (taskCategory){
+                getSelectedCategory(taskCategory);
+              },),
 
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text("Categories"),
-                    Wrap(
-                      runSpacing: 10,
-                      spacing: 8.0,
-                      children: categories.map((TaskCategory category) {
-                        bool isSelected = category == selectedCategory;
-                        return CategoryItem(
-                            category: category,
-                            callBack: (category, isSelected) {
-                              _updateSelectedCategory(isSelected, category);
-                            },
-                            isSelected: isSelected);
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 child: ElevatedButton(

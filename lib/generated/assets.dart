@@ -47,6 +47,7 @@ class Assets {
   static const String widgetsCustomTextFormField = 'lib/core/Shared/Widgets/Custom_text_form_field.dart';
   static const String widgetsDisplayCategoryItem = 'lib/app/feature/Category/Widgets/display_category_item.dart';
   static const String widgetsDropDownStatus = 'lib/app/feature/DisplayTaskDetails/Widgets/drop_down_status.dart';
+  static const String widgetsListOfCategories = 'lib/app/feature/AddTask/widgets/list_of_categories.dart';
   static const String widgetsNavigationBar = 'lib/core/Shared/Widgets/navigation_bar.dart';
   static const String widgetsParagraphTextField = 'lib/app/feature/AddTask/widgets/paragraph_text_field.dart';
   static const String widgetsPickDateWidget = 'lib/app/feature/AddTask/widgets/pick_date_widget.dart';

@@ -31,7 +31,7 @@ class _RecentTasksState extends State<RecentTasks> {
                 //await _refreshData(taskProvider); // Pass taskProvider here
               },
               child: ListView.builder(
-                itemCount: taskProvider.tasks.length,
+                itemCount:4,
                 itemBuilder: (BuildContext context, int index) {
                   return TaskListItem(task: taskProvider.tasks[index]);
                 },
