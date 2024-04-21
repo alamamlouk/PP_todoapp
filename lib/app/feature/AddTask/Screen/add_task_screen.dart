@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app/feature/AddTask/Services/Services.dart';
 import 'package:todo_app/app/feature/AddTask/Shared/taskDto.dart';
+import 'package:todo_app/app/feature/AddTask/widgets/category_item.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/paragraph_text_field.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/pick_date_widget.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/text_field_widget.dart';
@@ -66,6 +67,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       print('Error fetching categories: $error');
       // Handle error as needed
     }
+  }
+
+  void _updateSelectedCategory(bool isSelected, TaskCategory category) {
+    setState(() {
+      selectedCategory = isSelected ? null : category;
+    });
   }
 
   @override
@@ -180,33 +187,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       spacing: 8.0,
                       children: categories.map((TaskCategory category) {
                         bool isSelected = category == selectedCategory;
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedCategory = isSelected ? null : category;
-                            });
-                          },
-                          child: Container(
-
-                            padding: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: isSelected ? Colors.green : Colors.grey.shade200
-                              ,
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 1.5,
-                              ),
-                              boxShadow: [
-                                BoxShadow(  blurRadius: 8,
-                                    offset: Offset(0, 15),
-                                    color: Colors.grey.withOpacity(.6),
-                                    spreadRadius: -5)
-                              ],
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Text(category.categoryName),
-                          ),
-                        );
+                        return CategoryItem(
+                            category: category,
+                            callBack: (category, isSelected) {
+                              _updateSelectedCategory(isSelected, category);
+                            },
+                            isSelected: isSelected);
                       }).toList(),
                     ),
                   ],

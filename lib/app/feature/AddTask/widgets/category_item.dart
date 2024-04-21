@@ -3,45 +3,46 @@ import 'package:todo_app/core/Entity/task_category.dart';
 
 class CategoryItem extends StatefulWidget {
   final TaskCategory category;
-  final Function(TaskCategory) callBack;
+  final Function(TaskCategory, bool) callBack;
+  final bool isSelected;
 
-  const CategoryItem({Key? key, required this.category, required this.callBack}) : super(key: key);
+  const CategoryItem(
+      {Key? key,
+      required this.category,
+      required this.callBack,
+      required this.isSelected})
+      : super(key: key);
 
   @override
   _CategoryItemState createState() => _CategoryItemState();
 }
 
 class _CategoryItemState extends State<CategoryItem> {
-  Color _boxColor = Colors.blue;
-  void _changeColor() {
-    setState(() {
-      clicked = !clicked;
-      _boxColor = clicked ? Colors.green : Colors.blue;
-    });
-  }
 
-  bool clicked = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _changeColor();
-        widget.callBack(widget.category);
+        widget.callBack(widget.category, widget.isSelected);
       },
       child: Container(
-        width: 20,
-        height: 20,
-        alignment: Alignment.center,
+        padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: _boxColor,
+          color: widget.isSelected ? Colors.green : Colors.grey.shade200,
+          border: Border.all(
+            color: Colors.white,
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 8,
+                offset: Offset(0, 15),
+                color: Colors.grey.withOpacity(.6),
+                spreadRadius: -5)
+          ],
           borderRadius: BorderRadius.circular(10.0),
         ),
-        child: Text(
-          widget.category.categoryName,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
+        child: Text(widget.category.categoryName),
       ),
     );
   }

@@ -50,12 +50,10 @@ class _TaskDetailsState extends State<TaskDetails> {
     );
     globalTaskServices.updateTask(updatedTask);
     Provider.of<TaskProvider>(context, listen: false).updateTask(updatedTask);
-    print(updatedTask.subTasks);
   }
 
   @override
   Widget build(BuildContext context) {
-    taskNameController.text = widget.task.taskName;
     return Scaffold(
       appBar: AppBar(
         title: const Text("details"),

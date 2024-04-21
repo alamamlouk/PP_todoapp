@@ -22,22 +22,17 @@ class _DropDownStatusState extends State<DropDownStatus> {
   @override
   void initState() {
     taskProvider = Provider.of<TaskProvider>(context, listen: false);
-    print(widget.status);
-    print(Status.values);
     selectedStatus = Status.values.firstWhere(
 
             (e) => e.toString().toUpperCase() == 'STATUS.${widget.status}');
-    print(selectedStatus);
     super.initState();
 
 
   }
   void updateTaskState(Status newValue){
-    print(newValue);
     TaskUpdateRequest newTask = TaskUpdateRequest(
         taskId: widget.taskId, newStatus: newValue);
     globalTaskServices.updateTaskStatus(newTask);
-
     taskProvider.updateTaskStatus(newTask.taskId, newValue.toString().split('.')[1]);
   }
 
