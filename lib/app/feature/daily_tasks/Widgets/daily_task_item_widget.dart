@@ -1,6 +1,11 @@
-import 'package:flutter/material.dart';
+import 'dart:ffi';
 
+import 'package:flutter/material.dart';
+import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
+
+import '../../../core/DTO/task_update_request.dart';
 import '../../../core/Entity/Task.dart';
+import '../../../core/Enum/status.dart';
 
 class DailyTaskItemWidget extends StatefulWidget {
   final Task dailyTask;
@@ -23,7 +28,7 @@ class _DailyTaskItemWidgetState extends State<DailyTaskItemWidget> {
     return Colors.red;
   }
   bool isChecked = false;
-
+  GlobalTaskServices globalTaskServices=GlobalTaskServices();
   @override
   Widget build(BuildContext context) {
     if (widget.dailyTask.status == "DONE") {
@@ -56,6 +61,8 @@ class _DailyTaskItemWidgetState extends State<DailyTaskItemWidget> {
                     isChecked = value!;
                     widget.dailyTask.status = "DONE";
                   });
+                  TaskUpdateRequest newTaskRequest=TaskUpdateRequest(taskId: widget.dailyTask.taskId!, newStatus: Status.DONE);
+                  globalTaskServices.updateTaskStatus(newTaskRequest);
 
                 },
               ),
