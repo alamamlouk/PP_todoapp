@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -84,21 +85,7 @@ class GlobalTaskServices {
       return "Exception occurred: $error";
     }
   }
-  Future<void> uploadImage(String image,String taskId) async {
-    if (image == null) {
-      return;
-    }
-    var request = http.MultipartRequest(
-        'PATCH',
-        Uri.parse('$baseUrl/Task/addImage/$taskId'));
-    request.files.add(await http.MultipartFile.fromPath('file', image));
 
-    var response = await request.send();
-    if (response.statusCode == 200) {
-      print('Image uploaded successfully');
-    } else {
-      print('Failed to upload image. Status code: ${response.statusCode}');
-    }
-  }
+
 
 }

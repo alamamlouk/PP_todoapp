@@ -33,4 +33,17 @@ class AddTaskServices {
       throw Exception("Failed to add task: $e");
     }
   }
+  Future<void> uploadImage(String image,String taskId) async {
+    var request = http.MultipartRequest(
+        'PATCH',
+        Uri.parse('$baseUrl/Task/addImage/$taskId'));
+    request.files.add(await http.MultipartFile.fromPath('file', image));
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print('Image uploaded successfully');
+    } else {
+      print('Failed to upload image. Status code: ${response.statusCode}');
+    }
+  }
 }

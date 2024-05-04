@@ -21,19 +21,19 @@ class _RecentTasksState extends State<RecentTasks> {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (taskProvider.tasks.isEmpty) {
+          } else if (taskProvider.getNoneDailyTasks().isEmpty) {
             return const Center(
               child: Text("No task found"),
             );
           } else {
             return RefreshIndicator(
               onRefresh: () async {
-                //await _refreshData(taskProvider); // Pass taskProvider here
+                //await _refreshData(taskProvider);
               },
               child: ListView.builder(
-                itemCount:4,
+                itemCount: taskProvider.getNoneDailyTasks().length > 4 ? 4 : taskProvider.getNoneDailyTasks().length,
                 itemBuilder: (BuildContext context, int index) {
-                  return TaskListItem(task: taskProvider.tasks[index]);
+                  return TaskListItem(task: taskProvider.getNoneDailyTasks()[index]);
                 },
               ),
             );

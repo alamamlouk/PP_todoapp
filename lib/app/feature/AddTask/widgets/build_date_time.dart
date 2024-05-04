@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 class BuildDateTime extends StatelessWidget {
   final data;
   final Color hintTextColor;

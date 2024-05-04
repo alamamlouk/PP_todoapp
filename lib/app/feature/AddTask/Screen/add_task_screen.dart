@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app/feature/AddTask/Services/Services.dart';
 import 'package:todo_app/app/feature/AddTask/Shared/taskDto.dart';
-import 'package:todo_app/app/feature/AddTask/widgets/category_item.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/list_of_categories.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/paragraph_text_field.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/pick_date_widget.dart';
@@ -14,8 +17,10 @@ import 'package:todo_app/core/Entity/task_category.dart';
 import 'package:todo_app/core/Providers/task_category_provider.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_category_service.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
+import 'package:file_picker/file_picker.dart';
 
 import '../../../../core/Providers/task_provider.dart';
+import '../widgets/pcik_up_file.dart';
 import '../widgets/sub_task_add_widget.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -79,6 +84,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       selectedCategory = isSelected ? null : category;
     });
   }
+   File? file;
+  void getFile(File file){
+    setState(() {
+      this.file=file;
+    });
+}
   bool light = false;
 
   @override
@@ -164,23 +175,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {});
-                        },
-                        child: const Row(
-                          children: [
-                            Icon(Icons.attach_file),
-                            Text("Add attachment "),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
+               PickUpFile(callBack: getFile,),
               ListOfCategories(categories: categories, callBack: (taskCategory){
                 getSelectedCategory(taskCategory);
               },),
@@ -223,6 +218,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('task added')),
                       );
+                      // addTaskServices.uploadImage(file!.path.toString(), newTask.taskId!);
                       Provider.of<TaskProvider>(context, listen: false)
                           .add(newTask);
                     } else {

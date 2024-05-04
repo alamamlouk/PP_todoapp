@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/app/feature/CanceledTasks/canceled_tasks.dart';
+import 'package:todo_app/app/feature/OnGoingTasks/on_going_tasks.dart';
+import 'package:todo_app/app/feature/completedTasks/completed_tasks.dart';
 import 'package:todo_app/app/feature/daily_tasks/daily_task_page.dart';
 
 import 'BoxWithIconAndText .dart';
@@ -23,11 +26,12 @@ class _TaskStatusState extends State<TaskStatus> {
               BoxWithIconAndText(
                   icon: Icons.replay_circle_filled_rounded,
                   text: 'Daily Tasks',
-                  backgroundColor: Colors.blue, pageToNavigateTo: DailyTaskPage(),),
+                  backgroundColor: Colors.blue,
+                  pageToNavigateTo: DailyTaskPage(),),
               BoxWithIconAndText(
                   icon: Icons.timelapse_outlined,
                   text: 'On going',
-                  backgroundColor: Colors.orange, pageToNavigateTo: DailyTaskPage(),),
+                  backgroundColor: Colors.orange, pageToNavigateTo: OnGoingTasks(),),
             ],
           ),
         ),
@@ -39,11 +43,11 @@ class _TaskStatusState extends State<TaskStatus> {
               BoxWithIconAndText(
                   icon: Icons.fact_check_sharp,
                   text: 'Completed',
-                  backgroundColor: Colors.green, pageToNavigateTo: DailyTaskPage(),),
+                  backgroundColor: Colors.green, pageToNavigateTo: CompletedTasks(),),
               BoxWithIconAndText(
                   icon: Icons.delete_forever_outlined,
                   text: 'Canceled',
-                  backgroundColor: Colors.red, pageToNavigateTo: DailyTaskPage(),),
+                  backgroundColor: Colors.red, pageToNavigateTo: CanceledTasks(),),
             ],
           ),
         ),

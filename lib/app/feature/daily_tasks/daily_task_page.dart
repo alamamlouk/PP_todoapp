@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../../core/Entity/Task.dart';
 import '../../../core/Providers/task_provider.dart';
-import 'daily_task_item_widget.dart';
+import 'Widgets/daily_task_item_widget.dart';
 
 class DailyTaskPage extends StatelessWidget {
   const DailyTaskPage({Key? key}) : super(key: key);
@@ -12,6 +10,9 @@ class DailyTaskPage extends StatelessWidget {
   Widget build(BuildContext context) {
  
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+
+      },child: Icon(Icons.add),),
       appBar: AppBar(
         title: Text("Daily Tasks"),
       ),
@@ -28,7 +29,7 @@ class DailyTaskPage extends StatelessWidget {
           } else {
             return RefreshIndicator(
               onRefresh: () async {
-                //await _refreshData(taskProvider); // Pass taskProvider here
+
               },
               child: ListView.builder(
                 itemCount:taskProvider.getOnlyDailyTasks().length,

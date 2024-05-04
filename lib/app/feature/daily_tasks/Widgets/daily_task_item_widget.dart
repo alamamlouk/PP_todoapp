@@ -1,11 +1,10 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
 
-import '../../../core/DTO/task_update_request.dart';
-import '../../../core/Entity/Task.dart';
-import '../../../core/Enum/status.dart';
+import '../../../../core/DTO/task_update_request.dart';
+import '../../../../core/Entity/Task.dart';
+import '../../../../core/Enum/status.dart';
 
 class DailyTaskItemWidget extends StatefulWidget {
   final Task dailyTask;

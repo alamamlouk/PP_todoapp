@@ -66,4 +66,8 @@ class TaskProvider extends ChangeNotifier {
   List<Task> getOnlyTasksWithNoSubTasks(){
       return _tasks.where((task)=> task.subTasks == null).toList();
   }
+  List<Task> getNoneDailyTasks(){
+    return _tasks.where((task)=> task.dailyTask== false).toList();
+  }
+
 }

@@ -13,7 +13,7 @@ class TaskUpdateRequest {
     return {
       'taskId': taskId,
       'newStatus':
-          newStatus.toString().split('.')[1], // Use a specific representation
+          newStatus.toString().split('.')[1],
     };
   }
 
