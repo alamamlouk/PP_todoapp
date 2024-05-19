@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/app/feature/AddTask/Services/Services.dart';
 import 'package:todo_app/app/feature/AddTask/Shared/taskDto.dart';
@@ -11,13 +9,12 @@ import 'package:todo_app/app/feature/AddTask/widgets/list_of_categories.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/paragraph_text_field.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/pick_date_widget.dart';
 import 'package:todo_app/app/feature/AddTask/widgets/text_field_widget.dart';
-import 'package:todo_app/core/Entity/Task.dart';
+import 'package:todo_app/core/Entity/task.dart';
 import 'package:todo_app/core/Entity/sub_task.dart';
 import 'package:todo_app/core/Entity/task_category.dart';
 import 'package:todo_app/core/Providers/task_category_provider.dart';
-import 'package:todo_app/core/Shared/services/CategoryService/global_category_service.dart';
-import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:todo_app/core/Shared/services/global_category_service.dart';
+import 'package:todo_app/core/Shared/services/global_task_services.dart';
 
 import '../../../../core/Providers/task_provider.dart';
 import '../widgets/pcik_up_file.dart';
@@ -74,16 +71,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         categories = fetchedCategories;
       });
     } catch (error) {
-      print('Error fetching categories: $error');
       // Handle error as needed
     }
   }
 
-  void _updateSelectedCategory(bool isSelected, TaskCategory category) {
-    setState(() {
-      selectedCategory = isSelected ? null : category;
-    });
-  }
+  // void _updateSelectedCategory(bool isSelected, TaskCategory category) {
+  //   setState(() {
+  //     selectedCategory = isSelected ? null : category;
+  //   });
+  // }
    File? file;
   void getFile(File file){
     setState(() {
@@ -218,7 +214,10 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('task added')),
                       );
-                      // addTaskServices.uploadImage(file!.path.toString(), newTask.taskId!);
+                      if(file!=null){
+                        addTaskServices.uploadImage(file!.path.toString(), newTask.taskId!);
+
+                      }
                       Provider.of<TaskProvider>(context, listen: false)
                           .add(newTask);
                     } else {

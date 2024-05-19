@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../../core/Shared/Widgets/Custom_text_form_field.dart';
+import '../../../../core/Shared/Widgets/custom_text_form_field.dart';
 
 class SubTaskAddWidget extends StatelessWidget {
-   TextEditingController subTaskTitle =new TextEditingController() ;
-    TextEditingController subTaskDescription =new TextEditingController() ;
+   TextEditingController subTaskTitle =TextEditingController() ;
+    TextEditingController subTaskDescription = TextEditingController() ;
     final Function deleteSubTask ;
     SubTaskAddWidget({Key? key,required this.deleteSubTask}) : super(key: UniqueKey());
 
@@ -15,7 +15,7 @@ class SubTaskAddWidget extends StatelessWidget {
       children: [
         Container(
 
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10),
           width: double.infinity,
           decoration: BoxDecoration(
 
@@ -27,12 +27,12 @@ class SubTaskAddWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin:EdgeInsets.all(10),
+                margin:const EdgeInsets.all(10),
                 child: CustomTextFormField(
                   controller: subTaskTitle,
                   width: 350,
                   autofocus: false,
-                  contentPadding: EdgeInsets.all(10),
+                  contentPadding: const EdgeInsets.all(10),
                   fillColor: Colors.white,
                     hintText: "Sub task name",
                   borderDecoration: OutlineInputBorder(
@@ -41,13 +41,13 @@ class SubTaskAddWidget extends StatelessWidget {
                 ),
               ),
               Container(
-                margin:EdgeInsets.all(10),
+                margin:const EdgeInsets.all(10),
                 child: CustomTextFormField(
                   controller: subTaskDescription,
                   width: 350,
                   autofocus: false,
 
-                  contentPadding: EdgeInsets.all(10),
+                  contentPadding: const EdgeInsets.all(10),
                   fillColor: Colors.white,
                   hintText: "Sub task description",
                   maxLines: 2,
@@ -73,7 +73,7 @@ class SubTaskAddWidget extends StatelessWidget {
             height: 40,
             child: IconButton(
 
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               iconSize: 25,
               onPressed: () {
                 deleteSubTask(this);

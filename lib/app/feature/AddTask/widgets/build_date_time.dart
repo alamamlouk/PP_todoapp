@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 class BuildDateTime extends StatelessWidget {
-  final data;
+  final dynamic data;
   final Color hintTextColor;
   final IconData fontAwesomeIcons;
   const BuildDateTime({Key? key, required this.data, required this.fontAwesomeIcons, required this.hintTextColor}) : super(key: key);
@@ -14,7 +14,7 @@ class BuildDateTime extends StatelessWidget {
         boxShadow: [
           BoxShadow(
               blurRadius: 8,
-              offset: Offset(0, 10),
+              offset: const Offset(0, 10),
               color: Colors.grey.withOpacity(.6),
               spreadRadius: -5
           ),

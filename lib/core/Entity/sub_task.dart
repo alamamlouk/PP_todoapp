@@ -1,4 +1,4 @@
-import 'package:todo_app/core/Entity/Task.dart';
+import 'package:todo_app/core/Entity/task.dart';
 
 class SubTask{
   final String? subTaskId;

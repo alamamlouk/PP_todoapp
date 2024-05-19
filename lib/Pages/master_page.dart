@@ -3,6 +3,7 @@ import 'package:todo_app/app/feature/DisplayTasksInCalendar/Presentation/planing
 import 'package:todo_app/app/feature/Home/Screen/home_page.dart';
 import 'package:todo_app/core/Shared/Widgets/navigation_bar.dart';
 import '../app/feature/AddTask/Screen/add_task_screen.dart';
+import '../app/feature/Stats/stats_page.dart';
 class MasterPage extends StatefulWidget {
   const MasterPage({Key? key}) : super(key: key);
 
@@ -13,7 +14,7 @@ class MasterPage extends StatefulWidget {
 class _MasterPageState extends State<MasterPage> {
   int _currentIndex = 0;
 
-  List<Widget> pages = const [HomePage(), Planing()];
+  List<Widget> pages =  [const HomePage(), const Planing(),StatsPage()];
   final PageStorageBucket bucket = PageStorageBucket();
   @override
   Widget build(BuildContext context) {
@@ -27,6 +28,7 @@ class _MasterPageState extends State<MasterPage> {
           currentIndex: _currentIndex,
           onTap: (index) {
             setState(() {
+
               _currentIndex = index;
             });
           },

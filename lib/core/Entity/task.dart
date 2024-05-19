@@ -35,16 +35,16 @@ class Task {
     return Task(
         taskId: json['task_id'] as String,
         taskName: json['taskName'] as String,
-        taskDescription: json['taskDescription'] as String,
+        taskDescription: json['taskDescription']!=null? json['taskDescription'] as String:"",
         taskCreatedDate: DateTime.parse(json['taskCreatedDate']),
         theTimeTheTaskWasFinishedOn: json['theTimeTheTaskWasFinishedOn'] != null
             ? DateTime.parse(json['theTimeTheTaskWasFinishedOn'])
             : "not yet",
-        whenTheTaskWillStart: DateTime.parse(json['whenTheTaskWillStart']),
-        whenTheTaskWillBeDone: DateTime.parse(json['whenTheTaskWillBeDone']),
+        whenTheTaskWillStart:json['whenTheTaskWillStart']!=null? DateTime.parse(json['whenTheTaskWillStart']):null,
+        whenTheTaskWillBeDone: json['whenTheTaskWillBeDone']!=null?DateTime.parse(json['whenTheTaskWillBeDone']):null,
         status: json['status'] as String,
-        percentage: json['percentage'] as int,
-        category: TaskCategory.fromJson(json['category']),
+        percentage:json['percentage']!=null?json['percentage']  as int:0,
+        category: json['category']!=null?TaskCategory.fromJson(json['category']):null,
         subTasks: json['subTaskList'] != null
             ? (json['subTaskList'] as List)
             .map((subTaskJson) => SubTask.fromJson(subTaskJson))

@@ -29,7 +29,7 @@ class TimeBoxDetail extends StatelessWidget {
                     )
                   ],
                 ),
-                Center(
+                const Center(
                   child: Icon(Icons.arrow_forward_outlined),
                 ),
                 Column(

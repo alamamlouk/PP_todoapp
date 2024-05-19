@@ -1,6 +1,6 @@
 import 'package:todo_app/core/Entity/sub_task.dart';
 
-import '../../../../core/Entity/Task.dart';
+import '../../../../core/Entity/task.dart';
 
 int numberOfCompleteSubTask(Task task){
   int numberOfCompleteSubTasks=0;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../Entity/Task.dart';
+import '../Entity/task.dart';
 
 class TaskProvider extends ChangeNotifier {
   List<Task> _tasks = [];
@@ -70,4 +70,17 @@ class TaskProvider extends ChangeNotifier {
     return _tasks.where((task)=> task.dailyTask== false).toList();
   }
 
+  // int returnHowManyTaskFinishedByDay(){
+  //   _tasks.where((task) => false)
+  //   return 0;
+  // }
+  void resetDailyTask() {
+   for(Task task in _tasks){
+     if(task.dailyTask==true){
+       task.status="DONE";
+     }
+     notifyListeners();
+   }
+
+  }
 }

@@ -10,6 +10,6 @@ class TimeDetailsRowTime extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-        onPressed: () {}, child: Text("${DateFormat.jm().format(taskTime)}"));
+        onPressed: () {}, child: Text(DateFormat.jm().format(taskTime)));
   }
 }

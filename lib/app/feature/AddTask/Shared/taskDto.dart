@@ -1,4 +1,4 @@
-import '../../../../core/Entity/Task.dart';
+import '../../../../core/Entity/task.dart';
 import '../../../../core/Entity/sub_task.dart';
 
 class TaskDto {

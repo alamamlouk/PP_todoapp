@@ -19,23 +19,23 @@ class TaskEditOption extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.copy),
+          icon: const Icon(Icons.copy),
         ),
         IconButton(
           onPressed: () {
             editTask();
           },
-          icon: Icon(Icons.edit),
+          icon: const Icon(Icons.edit),
         ),
         IconButton(
           onPressed: () {},
-          icon: Icon(Icons.share),
+          icon: const Icon(Icons.share),
         ),
         IconButton(
           onPressed: () {
             deleteTask(taskId);
           },
-          icon: Icon(Icons.delete_forever),
+          icon: const Icon(Icons.delete_forever),
         ),
       ],
     );

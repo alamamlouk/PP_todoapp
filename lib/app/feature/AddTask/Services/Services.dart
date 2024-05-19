@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:todo_app/base_url.dart';
 
-import '../../../../core/Entity/Task.dart';
+import '../../../../core/Entity/task.dart';
 import '../Shared/taskDto.dart';
 
 class AddTaskServices {

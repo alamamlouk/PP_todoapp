@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/core/Entity/task_category.dart';
 import 'package:todo_app/core/Providers/task_category_provider.dart';
 
-import '../../../../core/Shared/services/CategoryService/global_category_service.dart';
+import '../../../../core/Shared/services/global_category_service.dart';
 
 class AddCategoryWidget extends StatelessWidget {
   final TaskCategory? categoryToUpdate;

@@ -16,10 +16,10 @@ class _StatusWidgetState extends State<StatusWidget> {
     return Container(
       width: 100,
       height: 40,
-      margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
       decoration: BoxDecoration(
           color: getStatusColor(status),
-          borderRadius: BorderRadius.all(Radius.circular(10))),
+          borderRadius: const BorderRadius.all(Radius.circular(10))),
       child: Center(child: Text(status)),
     );
   }

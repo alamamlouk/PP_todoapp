@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../core/DTO/task_update_request.dart';
 import '../../../../core/Enum/status.dart';
 import '../../../../core/Providers/task_provider.dart';
-import '../../../../core/Shared/services/CategoryService/global_task_services.dart';
+import '../../../../core/Shared/services/global_task_services.dart';
 
 class DropDownStatus extends StatefulWidget {
   final String taskId;

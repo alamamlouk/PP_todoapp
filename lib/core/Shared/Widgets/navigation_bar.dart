@@ -71,11 +71,7 @@ class CustomNavigationBar extends StatelessWidget {
                 MaterialButton(
                   splashColor: Colors.transparent,
                   highlightColor: Colors.transparent,
-                  onPressed: () {
-                    // setState(() {
-                    //   _currentIndex = 3;
-                    // });
-                  },
+                  onPressed: () => onTap(2),
                   minWidth: 40,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

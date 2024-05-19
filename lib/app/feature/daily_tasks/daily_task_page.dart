@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/app/feature/daily_tasks/Widgets/add_daily_task.dart';
 import '../../../core/Providers/task_provider.dart';
 import 'Widgets/daily_task_item_widget.dart';
 
@@ -11,10 +12,11 @@ class DailyTaskPage extends StatelessWidget {
  
     return Scaffold(
       floatingActionButton: FloatingActionButton(onPressed: () {
+         _showFormDialog(context);
 
-      },child: Icon(Icons.add),),
+      },child: const Icon(Icons.add),),
       appBar: AppBar(
-        title: Text("Daily Tasks"),
+        title: const Text("Daily Tasks"),
       ),
       body: Consumer<TaskProvider>(
         builder: (context, taskProvider, child) {
@@ -27,20 +29,23 @@ class DailyTaskPage extends StatelessWidget {
               child: Text("No Daily task  found"),
             );
           } else {
-            return RefreshIndicator(
-              onRefresh: () async {
-
+            return ListView.builder(
+              itemCount:taskProvider.getOnlyDailyTasks().length,
+              itemBuilder: (BuildContext context, int index) {
+                return DailyTaskItemWidget(dailyTask: taskProvider.getOnlyDailyTasks()[index],key: ValueKey(taskProvider.getOnlyDailyTasks()[index].taskId),);
               },
-              child: ListView.builder(
-                itemCount:taskProvider.getOnlyDailyTasks().length,
-                itemBuilder: (BuildContext context, int index) {
-                  return DailyTaskItemWidget(dailyTask: taskProvider.getOnlyDailyTasks()[index],);
-                },
-              ),
             );
           }
         },
       ),
+    );
+  }
+  Future<void> _showFormDialog(BuildContext context) async {
+    await showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const AddDailyTask();
+      },
     );
   }
 }

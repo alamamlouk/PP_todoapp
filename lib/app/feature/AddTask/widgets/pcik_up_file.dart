@@ -41,7 +41,7 @@ class _PickUpFileState extends State<PickUpFile> {
               },
               child:  Row(
                 children: [
-                  Icon(Icons.attach_file),
+                  const Icon(Icons.attach_file),
                   Text(selectedFileName),
                 ],
               )),

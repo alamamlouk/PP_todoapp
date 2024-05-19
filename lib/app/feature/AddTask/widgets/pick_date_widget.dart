@@ -5,8 +5,8 @@ import 'build_date_time.dart';
 
 class PickDateWidget extends StatelessWidget {
   ValueNotifier<DateTime?> dateSub = ValueNotifier(null);
-  late IconData icon;
-  String hintText;
+  final IconData icon;
+  final String hintText;
 
 
   PickDateWidget({Key? key, required this.dateSub,required this.icon,required this.hintText}) : super(key: key);

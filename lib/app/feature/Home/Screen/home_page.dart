@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/app/feature/Home/HomePageWidgets/app_bar.dart';
 import 'package:todo_app/app/feature/Home/HomePageWidgets/task_status.dart';
-import 'package:todo_app/core/Shared/services/CategoryService/global_category_service.dart';
+import 'package:todo_app/core/Shared/services/global_category_service.dart';
 
 import '../HomePageWidgets/recent_tasks.dart';
-import '../Services/task_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   //     tasks = updatedTasks;
   //   });
   // }
-  final TaskService _taskService = TaskService();
 
   final GlobalCategoryService globalCategoryService = GlobalCategoryService();
 

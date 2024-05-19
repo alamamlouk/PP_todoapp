@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-import '../../../../base_url.dart';
-import '../../../Entity/task_category.dart';
+import '../../../base_url.dart';
+import '../../Entity/task_category.dart';
 
 class GlobalCategoryService {
   Future<dynamic> fetchAllCategories() async {
@@ -44,7 +44,6 @@ class GlobalCategoryService {
         return addedCategory;
       }
     } catch (error) {
-      print('Exception during task addition: $error');
       return addedCategory;
     }
   }

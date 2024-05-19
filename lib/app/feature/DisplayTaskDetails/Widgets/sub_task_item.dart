@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_app/core/DTO/SubTaskDTO.dart';
+import 'package:todo_app/core/DTO/subTaskDTO.dart';
 import 'package:todo_app/core/Entity/sub_task.dart';
-import 'package:todo_app/core/Shared/services/CategoryService/sub_task_services.dart';
+import 'package:todo_app/core/Shared/services/sub_task_services.dart';
 
 import '../../../../core/Providers/task_provider.dart';
 

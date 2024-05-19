@@ -37,13 +37,13 @@ class DisplayCategoryItem extends StatelessWidget {
                       },
                     );
                   },
-                  icon: Icon(Icons.edit),
+                  icon: const Icon(Icons.edit),
                 ),
                 IconButton(
                   onPressed: () {
                     deleteCategory(taskCategory);
                   },
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                 ),
               ],
             ),

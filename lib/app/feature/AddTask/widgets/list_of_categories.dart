@@ -32,7 +32,7 @@ class _ListOfCategoriesState extends State<ListOfCategories> {
   @override
   Widget build(BuildContext context) {
     return    Container(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Column(
 
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-import '../../../../core/Entity/Task.dart';
+import '../../../../core/Entity/task.dart';
 
 class DataSource extends CalendarDataSource {
   DataSource(List<Appointment> appointments) {
@@ -15,7 +15,7 @@ DataSource getCalendarDataSource(List<Task> tasks) {
       startTime: task.whenTheTaskWillStart ?? DateTime.now(),
       endTime: task.whenTheTaskWillBeDone ?? DateTime.now(),
       subject: task.taskName,
-      color: Colors.blue, // Customize color based on your requirements
+      color: Colors.blue,
     );
   }).toList();
 

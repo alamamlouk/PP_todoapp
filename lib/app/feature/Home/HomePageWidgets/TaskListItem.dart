@@ -3,7 +3,7 @@ import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:todo_app/app/feature/DisplayTaskDetails/Screren/task_details.dart';
 import 'package:todo_app/app/feature/Home/HomePageWidgets/status_widget.dart';
 
-import '../../../../core/Entity/Task.dart';
+import '../../../../core/Entity/task.dart';
 
 class TaskListItem extends StatelessWidget {
   final Task task;
@@ -26,7 +26,6 @@ class TaskListItem extends StatelessWidget {
               MaterialPageRoute(builder: (context) => TaskDetails(task: task)),
             );
           } catch (error) {
-            print("the error:  ${error.toString()}");
           }
         },
         title: Text(
@@ -39,18 +38,18 @@ class TaskListItem extends StatelessWidget {
           children: [
             Text(
               task.category!.categoryName,
-              style: TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.grey),
             ),
             if (task.subTasks != null && task.subTasks!.isNotEmpty)
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.check_circle_outline,
                     size: 20,
                   ),
                   Text(
                     " ${task.subTasks!.length} subTasks",
-                    style: TextStyle(color: Colors.black87),
+                    style: const TextStyle(color: Colors.black87),
                   )
                 ],
               )

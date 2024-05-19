@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
-import 'package:todo_app/core/Entity/Task.dart';
+import 'package:todo_app/core/Entity/task.dart';
 
-import '../../../../base_url.dart';
-import '../../../DTO/task_update_request.dart';
+import '../../../base_url.dart';
+import '../../DTO/dailyTaskDto.dart';
+import '../../DTO/task_update_request.dart';
 
 class GlobalTaskServices {
   Future<List<Task>> fetchTasks() async {
@@ -85,7 +85,60 @@ class GlobalTaskServices {
       return "Exception occurred: $error";
     }
   }
+  Future<Task> addDailyTask(DailyTaskDTO dailyTaskDTO) async {
+    final headers = {'Content-Type': 'application/json'};
 
+    try {
+      final body = jsonEncode(dailyTaskDTO.toJson());
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/Task/addDailyTask'),
+        headers: headers,
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        Map<String, dynamic> jsonResponse = jsonDecode(response.body);
+        return Task.fromJson(jsonResponse);
+      } else {
+        print('Failed to add task. Status code: ${response.statusCode}');
+
+        throw Exception("Failed to add task");
+      }
+    } catch (e) {
+      print('Exception during task addition: $e');
+      throw Exception("Failed to add task: $e");
+    }
+  }
+  Future<void> uploadImage(String image,String taskId) async {
+    var request = http.MultipartRequest(
+        'PATCH',
+        Uri.parse('$baseUrl/Task/addImage/$taskId'));
+    request.files.add(await http.MultipartFile.fromPath('file', image));
+
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      print('Image uploaded successfully');
+    } else {
+      print('Failed to upload image. Status code: ${response.statusCode}');
+    }
+  }
+  Future<bool>resetDailyTask()async{
+    try{
+      final response=await http.put(Uri.parse('$baseUrl/Task/resetDailyTask'));
+      if (response.statusCode==200) {
+          return true;
+      }
+      else {
+        return false;
+      }
+
+    }catch(e){
+      return false;
+    }
+
+
+  }
 
 
 }

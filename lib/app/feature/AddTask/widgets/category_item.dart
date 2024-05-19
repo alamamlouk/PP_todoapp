@@ -36,7 +36,7 @@ class _CategoryItemState extends State<CategoryItem> {
           boxShadow: [
             BoxShadow(
                 blurRadius: 8,
-                offset: Offset(0, 15),
+                offset: const Offset(0, 15),
                 color: Colors.grey.withOpacity(.6),
                 spreadRadius: -5)
           ],

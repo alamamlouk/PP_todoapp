@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'package:todo_app/core/Entity/Task.dart';
+import 'package:todo_app/core/Entity/task.dart';
 import 'package:todo_app/core/Providers/task_provider.dart';
-import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
+import 'package:todo_app/core/Shared/services/global_task_services.dart';
 
 import '../../DisplayTaskDetails/Screren/task_details.dart';
 import '../Function/get_calendar_data_source.dart';
@@ -27,7 +27,6 @@ class _PlaningState extends State<Planing> {
         isLoading = false;
       });
     } catch (error) {
-      print('Error fetching tasks: $error');
       setState(() {
         isLoading = true;
       });
@@ -49,7 +48,6 @@ class _PlaningState extends State<Planing> {
                     const TimeSlotViewSettings(timeIntervalHeight: 100),
                 dataSource: getCalendarDataSource(taskProvider.tasks),
                 onTap: (calendarTapDetails) {
-                  print(calendarTapDetails.appointments![0].subject);
                   Task tappedTask = taskProvider.tasks.firstWhere((task) =>
                       task.taskName ==
                       calendarTapDetails.appointments![0].subject);

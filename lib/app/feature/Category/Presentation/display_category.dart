@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/app/feature/Category/Widgets/add_category_widget.dart';
 import 'package:todo_app/app/feature/Category/Widgets/display_category_item.dart';
 import 'package:todo_app/core/Providers/task_category_provider.dart';
-import 'package:todo_app/core/Shared/services/CategoryService/global_category_service.dart';
+import 'package:todo_app/core/Shared/services/global_category_service.dart';
 
 import '../../../../core/Entity/task_category.dart';
 
@@ -15,11 +15,10 @@ class DisplayCategory extends StatefulWidget {
 }
 
 class _DisplayCategoryState extends State<DisplayCategory> {
-  GlobalCategoryService _globalCategoryService = GlobalCategoryService();
+  final GlobalCategoryService _globalCategoryService = GlobalCategoryService();
 
   void deleteCategory(TaskCategory taskCategory) async {
     String response = await _globalCategoryService.deleteCategory(taskCategory);
-    print(response);
     if (response == "Category deleted") {
       Provider.of<TaskCategoryProvider>(context, listen: false)
           .deleteCategory(taskCategory);
@@ -41,8 +40,8 @@ class _DisplayCategoryState extends State<DisplayCategory> {
           await _showFormDialog(context);
           // _refreshCategories();
         },
-        child: Icon(Icons.add),
         backgroundColor: Colors.blue,
+        child: const Icon(Icons.add),
       ),
     );
   }

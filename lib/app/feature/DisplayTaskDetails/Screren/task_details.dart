@@ -4,9 +4,9 @@ import 'package:todo_app/app/feature/DisplayTaskDetails/Widgets/drop_down_status
 import 'package:todo_app/app/feature/DisplayTaskDetails/Widgets/sub_tasks_list.dart';
 import 'package:todo_app/app/feature/DisplayTaskDetails/Widgets/task_edit_option.dart';
 import 'package:todo_app/core/Providers/task_provider.dart';
-import 'package:todo_app/core/Shared/services/CategoryService/global_task_services.dart';
+import 'package:todo_app/core/Shared/services/global_task_services.dart';
 
-import '../../../../core/Entity/Task.dart';
+import '../../../../core/Entity/task.dart';
 import '../Widgets/time_box_detail.dart';
 
 class TaskDetails extends StatefulWidget {
